@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Grep\Core;
+namespace App\Grep;
 
 use App\Crawler\Contract\CrawlerContract;
 use Symfony\Component\DomCrawler\Crawler;
@@ -9,7 +9,7 @@ use Goutte\Client;
 class Core
 {
 	protected $url;
-	protected $crawler;
+	protected $dom;
 
 	public function __construct($url)
 	{
@@ -41,18 +41,35 @@ class Core
 		return $this;
 	}
 
-	public function text()
+	public function text($filter = null)
 	{
+		if($filter) {
+			return $this->grep->filter($filter)->first()->text();
+		}
 		return $this->dom->text();
 	}
 
-	public function image($attr = 'src')
+	public function image($filter = null, $attr = 'src')
 	{
+		if($filter) {
+			return $this->grep->filter($filter)->first()->attr($attr);
+		}
 		return $this->dom->attr($attr);
 	}
 
-	public function link()
+	public function link($filter = null)
 	{
+		if($filter) {
+			return $this->grep->filter($filter)->first()->link();
+		}
+		return $this->dom->link();
+	}
+
+	public function href($filter = null)
+	{
+		if($filter) {
+			return $this->grep->filter($filter)->first()->href();
+		}
 		return $this->dom->href();
 	}
 
