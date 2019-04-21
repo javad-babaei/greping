@@ -13,7 +13,7 @@ class Artist extends Api
 		$attach = $this->attach($data);
 		$data['imgId'] = $attach['id'];
 		$data['imgName'] = $attach['name'];
-		$this->client()->request('POST', 'Artist', $data);
+		return $this->client()->request('POST', 'Artist', $data);
 	}
 
 	public function attach($data)

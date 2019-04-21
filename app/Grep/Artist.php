@@ -41,6 +41,7 @@ class Artist
 	{
 		$data = $this->featchDom();
 		$result = (new \App\Grep\Entity\Artist())->create($data);
+		print_r(json_encode($result) . PHP_EOL);
 	}
 
 	public function proccess()
