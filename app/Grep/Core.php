@@ -2,14 +2,14 @@
 
 namespace App\Grep;
 
-use App\Crawler\Contract\CrawlerContract;
 use Symfony\Component\DomCrawler\Crawler;
 use Goutte\Client;
 
 class Core
 {
-	protected $url;
-	protected $dom;
+	public $url;
+	public $dom;
+	public $grep;
 
 	public function __construct($url)
 	{
@@ -31,13 +31,13 @@ class Core
 
 	public function first()
 	{
-		$this->dom = $this->dom->first()
+		$this->dom = $this->dom->first();
 		return $this;
 	}
 
 	public function eq($eq = 0)
 	{
-		$this->dom = $this->dom->eq($eq)
+		$this->dom = $this->dom->eq($eq);
 		return $this;
 	}
 
@@ -49,12 +49,17 @@ class Core
 		return $this->dom->text();
 	}
 
-	public function image($filter = null, $attr = 'src')
+	public function img($filter = null, $attr = 'src')
 	{
 		if($filter) {
 			return $this->grep->filter($filter)->first()->attr($attr);
 		}
 		return $this->dom->attr($attr);
+	}
+
+	public function each($value='')
+	{
+		# code...
 	}
 
 	public function link($filter = null)

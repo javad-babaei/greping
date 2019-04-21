@@ -40,8 +40,13 @@ class Artist extends Command
         $base_url = "https://ahaang.com/acat/pop/page/";
 
         for ($i=1; $i <= 29; $i++) { 
-            $grep = new App\Grep\Artist($base_url + 1);
-            $grep->add();
+            $base_url .= 1 . "/";
+            if($i == 1){
+                $base_url = "https://ahaang.com/acat/pop/";
+            }
+            $grep = new \App\Grep\Artist("https://ahaang.com/acat/pop/");
+            $grep->proccess();
+            die;
         }
         
     }
