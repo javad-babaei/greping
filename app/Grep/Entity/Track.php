@@ -99,9 +99,10 @@ class Track extends Api
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 
+
 		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
-		$audio->filters()->addMetadata([
+		$audio->addMetadata([
 			"track" => $data['name'],
 			"title" => $data['name'],
 			'artist' => $data['artist'],
