@@ -27,9 +27,6 @@ class Artist
 				" ", "-",$this->grep()->text('.profile_dtls h2')
 			),
 			'cover' => $file_url,
-			'filename' => $filename,
-			'size' => $size,
-			'type' => $type
 		];
 	}
 
