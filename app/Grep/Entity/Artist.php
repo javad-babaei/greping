@@ -16,7 +16,7 @@ class Artist extends Api
 	{
 		// create
 		$artist = $this->create($data);
-		$id = $track['id'];
+		$id = $artist['id'];
 		// download
 		$base_url = "https://stream.app.beatsmusic.ir/cover/$id.jpg";
 		$this->downloadFile($data['cover'], $id);
