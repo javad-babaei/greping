@@ -1,11 +1,11 @@
 <?php 
 namespace App\Grep\Entity;
 
-class Artist extends Api
+class Track extends Api
 {
 	public function create($data)
 	{
-		return $this->client()->request('POST', 'Artist', [
+		return $this->client()->request('POST', 'Track', [
 			'name' => $data['name']
 		]);
 	}
