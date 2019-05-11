@@ -23,7 +23,7 @@ class Track extends Api
 		$this->downloadFile($data['img'], $id, 'cover');
 		// upload data
 		$base_url = "https://stream.app.beatsmusic.ir";
-		$data['segmentlist'] = $base_url . "/track/hls/" . $id . '.m3u8';
+		$data['segmentlist'] = $base_url . "/track/segment/$id/track.m3u8";
 		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/track/" . $id . '.mp3';
 		$data['img'] = $base_url . "/cover/" . $id . '.jpg';
