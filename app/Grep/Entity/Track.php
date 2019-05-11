@@ -48,11 +48,14 @@ class Track extends Api
 			'where[0][value]' => 'عماد'
 		]);
 
-		$this->client()->request('POST', "track/$id/artist", [
-			'ids' => [
-				$artist['id']
-			]
-		]);
+		if($artist['total']) {
+			$this->client()->request('POST', "track/$id/artists", [
+				'ids' => [
+					$artist['list'][0]['id']
+				]
+			]);
+		}
+		
 	}
 
 	public function downloadFile($link, $id, $type = null)
