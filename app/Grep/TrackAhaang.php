@@ -46,7 +46,7 @@ class TrackAhaang
 	public function proccess()
 	{
 		$data = $this->featchDom();
-		(new \App\Grep\Entity\Track())->grep($data);
+		return (new \App\Grep\Entity\Track())->grep($data);
 	}
 
 }
