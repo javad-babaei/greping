@@ -5,23 +5,46 @@ class Artist extends Api
 {
 	public function create($data)
 	{
-		$data['assignedUserId'] = "5cba4dbe24ca9ace4";
-		$data['assignedUserName'] = "grep";
-		$data['createdById'] = "5cba4dbe24ca9ace4";
-		$data['createdByName'] = "grep";
-		$data['file'] = 'data:image/jpg;base64,' . base64_encode($data['file']);
-		$attach = $this->attach($data);
-		$data['imgId'] = $attach['id'];
-		$data['imgName'] = $attach['name'];
-		$this->client()->request('POST', 'Artist', $data);
+		return $this->client()->request('POST', 'Artist', [
+			'name' => $data['name'],
+			'assignedUserName' => 'root',
+			'assignedUserId' => 1
+		]);
 	}
 
-	public function attach($data)
+	public function grep($data)
 	{
-		$data['field'] = "img";
-		$data['name'] = $data['filename'];
-		$data['relatedType'] = "Artist";
-		$data['role'] = "Attachment";
-		return $this->client()->request('POST', 'Attachment', $data);
+		// create
+		$artist = $this->create($data);
+		// download
+		$base_url = "https://stream.app.beatsmusic.ir/cover/$id.jpg";
+		$this->downloadFile($data['cover'], $id);
+
+		$data['cover'] = $base_url;
+		$this->updateArtist($data, $id);
+	}
+
+	public function updateArtist($data, $id)
+	{
+		return $this->client()->request('PUT', 'Artist/' . $id, $data);
+	}
+
+	public function downloadFile($link, $id)
+	{
+		set_time_limit(0);
+		//This is the file where we save the    information
+		$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
+		
+		$fp = fopen ( $filename , 'w+');
+		//Here is the file we are downloading, replace spaces with %20
+		$ch = curl_init(str_replace(" ","%20",$link));
+		curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+		// write curl response to file
+		curl_setopt($ch, CURLOPT_FILE, $fp); 
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		// get curl response
+		curl_exec($ch); 
+		curl_close($ch);
+		fclose($fp);
 	}
 }

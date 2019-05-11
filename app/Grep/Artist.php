@@ -19,10 +19,6 @@ class Artist
 	public function featchDom()
 	{	
 		$file_url =  $this->grep()->img('.profile_pic_main img', 'data-src');
-		$filename = basename($file_url);
-		$binary = file_get_contents($file_url);
-		$size = strlen($binary);
-		$type = getimagesizefromstring($binary)['mime'];
 
 		return [
 			'name' => $this->grep()->text('.profile_dtls strong'),
@@ -30,8 +26,8 @@ class Artist
 			'simplename' => str_replace(
 				" ", "-",$this->grep()->text('.profile_dtls h2')
 			),
+			'cover' => $file_url,
 			'filename' => $filename,
-			'file' => $binary,
 			'size' => $size,
 			'type' => $type
 		];
@@ -40,7 +36,7 @@ class Artist
 	public function add()
 	{
 		$data = $this->featchDom();
-		$result = (new \App\Grep\Entity\Artist())->create($data);
+		$result = (new \App\Grep\Entity\Artist())->grep($data);
 	}
 
 	public function proccess()
