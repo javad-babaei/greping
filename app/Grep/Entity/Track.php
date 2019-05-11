@@ -88,9 +88,10 @@ class Track extends Api
 		    echo "$percentage % transcoded";
 		});
 
-		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
+		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
+		$audio->filters()->addMetadata(["title" => "Some Title", "track" => 1]);
 		$audio->save($format, $filename);
 	}
 
