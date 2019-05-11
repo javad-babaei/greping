@@ -22,11 +22,12 @@ class Track extends Api
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['img'], $id, 'cover');
 		// upload data
-		$base_url = "stream.app.beatsmusic.ir";
-		$data['segment_list'] = $base_url . "\/track\/hls\/" . $id . '.m3u8';
-		$data['stream'] = $base_url . "\/track\/stream\/" . $id . '.aac';
-		$data['img'] = $base_url . "\/cover\/" . $id . '.jpg';
-		$this->FFMpeg($id);
+		$base_url = "https://stream.app.beatsmusic.ir";
+		$data['segmentlist'] = $base_url . "/track/hls/" . $id . '.m3u8';
+		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
+		$data['img'] = $base_url . "/cover/" . $id . '.jpg';
+		$duration = $this->FFMpeg($id, $data);
+		$data['duration'] = $duration;
 		// update track
 		$this->updateTrack($id, $data);
 		// related with artist
@@ -43,7 +44,8 @@ class Track extends Api
 		$artist = $this->client()->request('GET', 'Artist', [
 			'where[0][type]' => 'equals',
 			'where[0][attribute]' => 'name',
-			'where[0][value]' => $name
+			// 'where[0][value]' => $name
+			'where[0][value]' => 'عماد'
 		]);
 
 		$this->client()->request('POST', "track/$id/artist", [
@@ -75,7 +77,7 @@ class Track extends Api
 		fclose($fp);
 	}
 
-	public function FFMpeg($id)
+	public function FFMpeg($id, $data = null)
 	{
 		$filesource = '/home/apps/music/repository/track/' . $id . '.mp3';
 
@@ -90,8 +92,15 @@ class Track extends Api
 		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
-		$audio->filters()->addMetadata(["title" => "Some Title", "track" => 1]);
+		$audio->filters()->addMetadata([
+			"title" => $data['name'],
+			"Artist Name" => $data['artist'],
+			'comment' => 'https://beatsmusic.ir'
+		]);
 		$audio->save($format, $filename);
+
+		$ffprobe = \FFMpeg\FFProbe::create();
+		return $ffprobe->format($filename)->get('duration'); 
 	}
 
 }
