@@ -16,11 +16,12 @@ class Track extends Api
 	{
 		// create entity
 		$track = $this->create($data);
+		$id = $track['id'];
 		// downloaded
 		$base_url = "stream.app.beatsmusic.ir";
-		$stream = $base_url . "\/track\/stream\/" . $track['id'];
-		$trackUrl = $base_url . "\/track\/" . $track['id'];
-		$img = $base_url . "\/cover\/" . $track['id'];
+		$stream = $base_url . "\/track\/stream\/" . $id;
+		$trackUrl = $base_url . "\/track\/" . $id;
+		$img = $base_url . "\/cover\/" . $id;
 
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['cover'], $id, 'cover');
