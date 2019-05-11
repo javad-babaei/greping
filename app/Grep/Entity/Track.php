@@ -25,6 +25,7 @@ class Track extends Api
 		$base_url = "https://stream.app.beatsmusic.ir";
 		$data['segmentlist'] = $base_url . "/track/hls/" . $id . '.m3u8';
 		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
+		$data['trackUrl'] = $base_url . "/track/stream/" . $id . '.mp3';
 		$data['img'] = $base_url . "/cover/" . $id . '.jpg';
 		$duration = $this->FFMpeg($id, $data);
 		$data['duration'] = $duration;
@@ -55,7 +56,7 @@ class Track extends Api
 				]
 			]);
 		}
-		
+
 	}
 
 	public function downloadFile($link, $id, $type = null)
@@ -101,6 +102,13 @@ class Track extends Api
 		// 	'comment' => 'https://beatsmusic.ir'
 		// ]);
 		$audio->save($format, $filename);
+
+		$ffmpeg = FFMpeg\FFMpeg::create();
+		$audio = $ffmpeg->open($filename);
+		$audio->filters()->addMetadata([
+			"title" => $data['name'],
+			"comment" => "https://beatsmusic.ir"
+		]);
 
 		$ffprobe = \FFMpeg\FFProbe::create();
 		return $ffprobe->format($filename)->get('duration'); 
