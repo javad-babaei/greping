@@ -102,10 +102,13 @@ class Track extends Api
 		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
 		$audio->filters()->addMetadata([
+			"track" => $data['name'],
 			"title" => $data['name'],
 			'artist' => $data['artist'],
 			'genre' => 'پاپ',
-			"description" => "https://beatsmusic.ir"
+			"comment" => "Amazing iranian songs https://beatsmusic.ir",
+			"description" => "api services from https://beatsmusic.ir",
+			"lyrics" => $data['lyric']
 		]);
 
 		$ffprobe = \FFMpeg\FFProbe::create();
