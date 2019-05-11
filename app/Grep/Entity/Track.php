@@ -45,8 +45,7 @@ class Track extends Api
 		$artist = $this->client()->request('GET', 'Artist', [
 			'where[0][type]' => 'equals',
 			'where[0][attribute]' => 'name',
-			// 'where[0][value]' => $name
-			'where[0][value]' => 'عماد'
+			'where[0][value]' => trim($name)
 		]);
 
 		if($artist['total']) {
