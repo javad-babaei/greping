@@ -62,10 +62,10 @@ class Track extends Api
 	{
 		$filesource = '/home/apps/music/repository/track/' . $id . '.mp3';
 
-		$ffmpeg = FFMpeg\FFMpeg::create();
+		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
 
-		$format = new FFMpeg\Format\Audio\Flac();
+		$format = new \FFMpeg\Format\Audio\Flac();
 		$format->on('progress', function ($audio, $format, $percentage) {
 		    echo "$percentage % transcoded";
 		});
