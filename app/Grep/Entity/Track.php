@@ -23,22 +23,33 @@ class Track extends Api
 		$this->downloadFile($data['img'], $id, 'cover');
 		// upload data
 		$base_url = "stream.app.beatsmusic.ir";
-		$data['stream'] = $base_url . "\/track\/stream\/" . $id . '.m3u8';
-		$data['trackUrl'] = $base_url . "\/track\/" . $id . '.aac';
+		$data['segment_list'] = $base_url . "\/track\/hls\/" . $id . '.m3u8';
+		$data['stream'] = $base_url . "\/track\/stream\/" . $id . '.aac';
 		$data['img'] = $base_url . "\/cover\/" . $id . '.jpg';
-		$this->updateArtist($id, $data);
-		$this->relatedToArtist($data);
+		// update track
+		$this->updateTrack($id, $data);
+		// related with artist
+		$this->relatedToArtist($data['artist'], $id);
 	}
 
-	public function updateArtist($data)
+	public function updateTrack($id, $data)
 	{
 		return $this->client()->request('PUT', 'Track/' . $id, $data);
 	}
 
-	public function relatedToArtist($Artist, $id)
+	public function relatedToArtist($name, $id)
 	{
 		$artist = $this->client()->request('GET', 'Aritst', [
-			//  where
+			'select' => 'name',
+			'where[0][type]' => 'equals',
+			'where[0][attribute]' => 'name',
+			'where[0][value]' => $name
+		]);
+
+		$this->client()->request('POST', "track/$id/artist", [
+			'ids' => [
+				$artist['id']
+			]
 		]);
 	}
 
@@ -71,14 +82,14 @@ class Track extends Api
 		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
 
-		$format = new \FFMpeg\Format\Audio\Flac();
+		$format = new \FFMpeg\Format\Audio\Aac();
 		$format->on('progress', function ($audio, $format, $percentage) {
 		    echo "$percentage % transcoded";
 		});
 
 		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
-		$filename = '/home/apps/music/repository/track/stream/' . $id . '.flac';
+		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 	}
 
