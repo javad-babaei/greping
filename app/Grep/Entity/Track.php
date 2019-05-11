@@ -18,9 +18,9 @@ class Track extends Api
 		$track = $this->create($data);
 		// downloaded
 		$base_url = "stream.app.beatsmusic.ir";
-		$stream = $base_url . "\/track\/stream\/" . $track->id;
-		$trackUrl = $base_url . "\/track\/" . $track->id;
-		$img = $base_url . "\/cover\/" . $track->id;
+		$stream = $base_url . "\/track\/stream\/" . $track['id'];
+		$trackUrl = $base_url . "\/track\/" . $track['id'];
+		$img = $base_url . "\/cover\/" . $track['id'];
 
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['cover'], $id, 'cover');
