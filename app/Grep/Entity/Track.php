@@ -56,7 +56,6 @@ class Track extends Api
 		curl_exec($ch); 
 		curl_close($ch);
 		fclose($fp);
-		return $file;
 	}
 
 	public function hls($id)
