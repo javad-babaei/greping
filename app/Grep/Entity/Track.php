@@ -41,7 +41,6 @@ class Track extends Api
 	public function relatedToArtist($name, $id)
 	{
 		$artist = $this->client()->request('GET', 'Artist', [
-			'select' => 'id',
 			'where[0][type]' => 'equals',
 			'where[0][attribute]' => 'name',
 			'where[0][value]' => $name
