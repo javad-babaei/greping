@@ -33,16 +33,9 @@ class Artist
 	public function add()
 	{
 		$data = $this->featchDom();
-		$result = (new \App\Grep\Entity\Artist())->grep($data);
-	}
-
-	public function proccess()
-	{
-		$this->grep()->filter('.post_body a.post_img')->dom()->each(function (Crawler $node, $i){
-			$url = $node->attr('href');
-			$artist = new \App\Grep\Artist($url);
-			$artist->add();
-		});
+		(
+			new \App\Grep\Entity\Artist
+		)->grep($data);
 	}
 
 }
