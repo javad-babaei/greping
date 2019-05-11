@@ -5,7 +5,7 @@ class Track extends Api
 {
 	public function create($data)
 	{	
-		$response = $this->client()->request('POST', 'Track', [
+		return $this->client()->request('POST', 'Track', [
 			'name' => $data['name'],
 			'assignedUserName' => 'root',
 			'assignedUserId' => 1
