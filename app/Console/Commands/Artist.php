@@ -37,6 +37,16 @@ class Artist extends Command
      */
     public function handle()
     {
+        $url = "";
+        if($url){
+            $artist = new \App\Grep\Artist($url);
+            $artist->add();
+            return true;
+        }
+
+        die;
+
+
         $base_url = "https://ahaang.com/acat/pop/page/";
 
         for ($i=1; $i <= 29; $i++) { 
