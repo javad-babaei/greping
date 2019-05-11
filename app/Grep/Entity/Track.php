@@ -100,9 +100,10 @@ class Track extends Api
 		$audio->save($format, $filename);
 
 
-		$ffprobe = \FFMpeg\FFProbe::create();
-		$audio = $ffprobe->open($filesource);
-		$audio->addMetadata([
+
+		$ffmpeg = \FFMpeg\FFMpeg::create();
+		$audio = $ffmpeg->open($filesource);
+		$audio->filters()->addMetadata([
 			"track" => $data['name'],
 			"title" => $data['name'],
 			'artist' => $data['artist'],
