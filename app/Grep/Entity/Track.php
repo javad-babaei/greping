@@ -31,12 +31,12 @@ class Track extends Api
 		// upload data
 	}
 
-	public function relatedToArtist($Artist, $id, $type = null)
+	public function relatedToArtist($Artist, $id)
 	{
 		# code...
 	}
 
-	public function downloadFile($link, $id)
+	public function downloadFile($link, $id, $type = null)
 	{
 		set_time_limit(0);
 		//This is the file where we save the    information
