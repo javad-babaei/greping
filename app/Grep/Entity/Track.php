@@ -24,7 +24,7 @@ class Track extends Api
 		$img = $base_url . "\/cover\/" . $id;
 
 		$this->downloadFile($data['downloadUrl'], $id);
-		$this->downloadFile($data['cover'], $id, 'cover');
+		$this->downloadFile($data['img'], $id, 'cover');
 		$this->hls($id);	
 
 		// releated
