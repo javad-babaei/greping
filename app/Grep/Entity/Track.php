@@ -103,7 +103,7 @@ class Track extends Api
 		// ]);
 		$audio->save($format, $filename);
 
-		$ffmpeg = FFMpeg\FFMpeg::create();
+		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filename);
 		$audio->filters()->addMetadata([
 			"title" => $data['name'],
