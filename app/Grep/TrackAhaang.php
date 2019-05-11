@@ -38,8 +38,7 @@ class TrackAhaang
 			'lyric' => $lyric,
 			'translate' => $translate,
 			'name' => $name,
-			'artists' => $artist_name
-
+			'artist' => $artist_name
 		];
 	}
 

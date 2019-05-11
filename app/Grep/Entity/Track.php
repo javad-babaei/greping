@@ -17,23 +17,29 @@ class Track extends Api
 		// create entity
 		$track = $this->create($data);
 		$id = $track['id'];
-		// downloaded
-		$base_url = "stream.app.beatsmusic.ir";
-		$stream = $base_url . "\/track\/stream\/" . $id;
-		$trackUrl = $base_url . "\/track\/" . $id;
-		$img = $base_url . "\/cover\/" . $id;
 
+		// downloaded
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['img'], $id, 'cover');
-		$this->hls($id);	
-
-		// releated
 		// upload data
+		$base_url = "stream.app.beatsmusic.ir";
+		$data['stream'] = $base_url . "\/track\/stream\/" . $id . '.m3u8';
+		$data['trackUrl'] = $base_url . "\/track\/" . $id . '.aac';
+		$data['img'] = $base_url . "\/cover\/" . $id . '.jpg';
+		$this->updateArtist($id, $data);
+		$this->relatedToArtist($data);
+	}
+
+	public function updateArtist($data)
+	{
+		return $this->client()->request('PUT', 'Track/' . $id, $data);
 	}
 
 	public function relatedToArtist($Artist, $id)
 	{
-		# code...
+		$artist = $this->client()->request('GET', 'Aritst', [
+			//  where
+		]);
 	}
 
 	public function downloadFile($link, $id, $type = null)
@@ -70,7 +76,7 @@ class Track extends Api
 		    echo "$percentage % transcoded";
 		});
 
-		$format->setAudioChannels(2)->setAudioKiloBitrate(320);
+		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.flac';
 		$audio->save($format, $filename);
