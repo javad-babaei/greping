@@ -96,11 +96,6 @@ class Track extends Api
 		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
-		// $audio->filters()->addMetadata([
-		// 	"title" => $data['name'],
-		// 	"Artist Name" => $data['artist'],
-		// 	'comment' => 'https://beatsmusic.ir'
-		// ]);
 		$audio->save($format, $filename);
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
