@@ -25,7 +25,7 @@ class Track extends Api
 		$base_url = "https://stream.app.beatsmusic.ir";
 		$data['segmentlist'] = $base_url . "/track/hls/" . $id . '.m3u8';
 		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
-		$data['trackUrl'] = $base_url . "/track/stream/" . $id . '.mp3';
+		$data['trackUrl'] = $base_url . "/track/" . $id . '.mp3';
 		$data['img'] = $base_url . "/cover/" . $id . '.jpg';
 		$duration = $this->FFMpeg($id, $data);
 		$data['duration'] = $duration;
@@ -93,7 +93,8 @@ class Track extends Api
 		    echo "$percentage % transcoded";
 		});
 
-		$format->setAudioChannels(2)->setAudioKiloBitrate(256);
+		// need aac format ziped
+		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 		
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
@@ -102,8 +103,10 @@ class Track extends Api
 		$audio = $ffmpeg->open($filename);
 		$audio->filters()->addMetadata([
 			"title" => $data['name'],
-			"comment" => "https://beatsmusic.ir"
-		]);
+			'artist' => $data['artist'],
+			'genre' => 'پاپ',
+			"description" => "https://beatsmusic.ir"
+		])->save();
 
 		$ffprobe = \FFMpeg\FFProbe::create();
 		return $ffprobe->format($filename)->get('duration'); 
