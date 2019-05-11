@@ -26,6 +26,7 @@ class Track extends Api
 		$data['segment_list'] = $base_url . "\/track\/hls\/" . $id . '.m3u8';
 		$data['stream'] = $base_url . "\/track\/stream\/" . $id . '.aac';
 		$data['img'] = $base_url . "\/cover\/" . $id . '.jpg';
+		$this->FFMpeg($id);
 		// update track
 		$this->updateTrack($id, $data);
 		// related with artist
@@ -39,7 +40,7 @@ class Track extends Api
 
 	public function relatedToArtist($name, $id)
 	{
-		$artist = $this->client()->request('GET', 'Aritst', [
+		$artist = $this->client()->request('GET', 'Artist', [
 			'select' => 'name',
 			'where[0][type]' => 'equals',
 			'where[0][attribute]' => 'name',
@@ -75,7 +76,7 @@ class Track extends Api
 		fclose($fp);
 	}
 
-	public function hls($id)
+	public function FFMpeg($id)
 	{
 		$filesource = '/home/apps/music/repository/track/' . $id . '.mp3';
 
