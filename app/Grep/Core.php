@@ -65,17 +65,17 @@ class Core
 	public function link($filter = null)
 	{
 		if($filter) {
-			return $this->grep->filter($filter)->first()->link();
+			return $this->grep->filter($filter)->first()->attr('href');
 		}
-		return $this->dom->link();
+		return $this->dom->attr('href');
 	}
 
 	public function href($filter = null)
 	{
 		if($filter) {
-			return $this->grep->filter($filter)->first()->href();
+			return $this->grep->filter($filter)->first()->attr('href');
 		}
-		return $this->dom->href();
+		return $this->dom->attr('href');
 	}
 
 

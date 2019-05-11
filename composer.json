@@ -13,7 +13,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "php-ffmpeg/php-ffmpeg": "^0.7.0@dev",
+        "php-ffmpeg/php-ffmpeg": "^0.14.0",
         "snapycloud/php-api": "dev-master",
         "symfony/dom-crawler": "^4.0"
     },

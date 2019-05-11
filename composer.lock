@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48a3e5649571e4c9ed822fc51e94fc3a",
+    "content-hash": "79ddd362e36db96eec6306c305d70ea7",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -1514,7 +1514,7 @@
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",
-            "version": "dev-master",
+            "version": "v0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-FFMpeg/PHP-FFMpeg.git",
@@ -5241,7 +5241,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "php-ffmpeg/php-ffmpeg": 20,
         "snapycloud/php-api": 20
     },
     "prefer-stable": true,
