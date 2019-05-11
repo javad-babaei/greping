@@ -106,7 +106,7 @@ class Track extends Api
 			'artist' => $data['artist'],
 			'genre' => 'پاپ',
 			"description" => "https://beatsmusic.ir"
-		])->save();
+		]);
 
 		$ffprobe = \FFMpeg\FFProbe::create();
 		return $ffprobe->format($filename)->get('duration'); 
