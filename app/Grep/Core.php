@@ -44,7 +44,12 @@ class Core
 	public function text($filter = null)
 	{
 		if($filter) {
-			return $this->grep->filter($filter)->first()->text();
+			$dom = $this->grep->filter($filter);
+			if($dom->count()) {
+				return $dom->first()->text();	
+			}
+
+			return '';
 		}
 		return $this->dom->text();
 	}
