@@ -37,7 +37,7 @@ class TrackAhaang extends Command
      */
     public function handle()
     {
-        $url = "https://ahaang.com/%D8%A2%D9%87%D9%86%DA%AF-%D9%86%D8%A7%D8%B5%D8%B1-%D8%B2%DB%8C%D9%86%D8%B9%D9%84%DB%8C-%D9%81%D9%82%D8%B7-%D8%A8%D8%A7%D8%B4/";
+        $url = "";
         $grep = new \App\Grep\TrackAhaang($url);
         $grep->proccess();
     }

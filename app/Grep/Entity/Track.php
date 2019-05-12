@@ -42,10 +42,12 @@ class Track extends Api
 
 	public function relatedToArtist($name, $id)
 	{
+		$name = trim($name, " ");
+		$name = trim($name);
 		$artist = $this->client()->request('GET', 'Artist', [
 			'where[0][type]' => 'equals',
 			'where[0][attribute]' => 'name',
-			'where[0][value]' => trim($name)
+			'where[0][value]' => $name
 		]);
 
 		if($artist['total']) {
