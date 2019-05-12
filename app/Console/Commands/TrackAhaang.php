@@ -37,8 +37,11 @@ class TrackAhaang extends Command
      */
     public function handle()
     {
-        $url = "";
-        $grep = new \App\Grep\TrackAhaang($url);
-        $grep->proccess();
+        $list = file(app_path() . 'urls.csv');
+        foreach ($list as $item) {
+            $grep = new \App\Grep\TrackAhaang($url);
+            $grep->proccess();    
+        }
+        
     }
 }

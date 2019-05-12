@@ -38,6 +38,7 @@ class TrackAhaang
 			'lyric' => $lyric,
 			'translate' => $translate,
 			'name' => $name,
+			'published' => $this->grep()->text('.icon-calendar'),
 			'artist' => $artist_name
 		];
 	}
