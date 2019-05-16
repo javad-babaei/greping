@@ -35,8 +35,7 @@ class Artist extends Api
 		set_time_limit(0);
 		//This is the file where we save the    information
 		$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
-		file_put_contents($filename , fopen($link, 'r'));
-		return true;
+		// file_put_contents($filename , fopen($link, 'r'));
 		
 		$fp = fopen ( $filename , 'w+');
 		//Here is the file we are downloading, replace spaces with %20
