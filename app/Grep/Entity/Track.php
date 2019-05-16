@@ -81,7 +81,7 @@ class Track extends Api
 			return true;
 		}
 
-		file_put_contents($filename , fopen($link, 'r'));
+		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
 		return true;
 	}
 
