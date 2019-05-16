@@ -62,13 +62,16 @@ class Track extends Api
 
 	public function downloadFile($link, $id, $type = null)
 	{
-		set_time_limit(0);
 		//This is the file where we save the    information
 		$filename = '/home/apps/music/repository/track/' . $id . '.mp3';
 		if($type) {
 			$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
 		}
-		
+
+		file_put_contents($filename , fopen($link, 'r'));
+		return true;
+
+		// disabled this part download some track incorrct
 		$fp = fopen ( $filename , 'w+');
 		//Here is the file we are downloading, replace spaces with %20
 		$ch = curl_init(str_replace(" ","%20",$link));
@@ -91,7 +94,7 @@ class Track extends Api
 
 		$format = new \FFMpeg\Format\Audio\Aac();
 		$format->on('progress', function ($audio, $format, $percentage) {
-		    echo "$percentage % transcoded";
+		    echo "$percentage % transcoded" . PHP_EOL;
 		});
 
 		// need aac format ziped

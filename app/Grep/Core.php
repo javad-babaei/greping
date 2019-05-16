@@ -18,6 +18,11 @@ class Core
 		$this->grep = $client->request('GET', $this->url);
 	}
 
+	public function count()
+	{
+		return $this->dom()->count();
+	}
+
 	public function dom()
 	{
 		return $this->dom;
