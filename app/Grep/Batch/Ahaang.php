@@ -25,8 +25,15 @@ class Ahaang
 			$name = $this->grep()->filter('.single_text strong')->eq(1)->text();
 			$artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();	
 		} else {
-			$name = $this->grep()->filter('.single_text b')->eq(0)->text();
-			$artist_name = $this->grep()->filter('.single_text b')->eq(1)->text();	
+			$count = $this->grep()->filter('.single_text b')->count();
+			if($count >= 2) {
+				$name = $this->grep()->filter('.single_text b')->eq(0)->text();
+				$artist_name = $this->grep()->filter('.single_text b')->eq(1)->text();	
+			} else {
+				$name = $this->grep()->filter('#breadcrumbs a')->eq(1)->text();
+				$artist_name = $this->grep()->filter('#breadcrumbs span')->eq(2)->text();
+				$name = str_replace("دانلود آهنگ " . $artist_name,'' , $name);
+			}
 		}
 
 		
