@@ -42,9 +42,9 @@ class TrackAhangBatch extends Command
     {
         // get artist
         $url = $this->argument('url');
-
         $artist = new Artist($url);
         $artist->add();
+        
         $track_links = $artist->getTrackLink();
         // $artist->getAlbum();
 

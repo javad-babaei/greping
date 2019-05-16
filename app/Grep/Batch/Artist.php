@@ -36,7 +36,6 @@ class Artist
 	{
 		$data = $this->featchDom();
 		$this->data = $data;
-		return;
 		(
 			new \App\Grep\Entity\Artist
 		)->grep($data);
