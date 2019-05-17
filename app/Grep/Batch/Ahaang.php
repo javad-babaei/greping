@@ -24,10 +24,13 @@ class Ahaang
 		if($count > 2) {
 			$name = $this->grep()->filter('.single_text strong')->eq(1)->text();
 			$artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();	
+		} elseif ($count == 2) {
+			$name = $this->grep()->filter('.single_text strong')->eq(0)->text();
+			$artist_name = $this->grep()->filter('.single_text strong')->eq(1)->text();	
 		} else {
 			$count = $this->grep()->filter('.single_text b')->count();
 
-			if($count >= 2) {
+			if($count >= 1) {
 				$name = $this->grep()->filter('.single_text b')->eq(0)->text();
 				$artist_name = $this->grep()->filter('.single_text b')->eq(1)->text();	
 			} else {
@@ -38,6 +41,10 @@ class Ahaang
 		}
 
 		
+		$single_track_count = $this->grep()->filter('.single_track')->count();
+		if($single_track_count == 1) {
+			return false;
+		}
 		$trackUrl = $this->grep()->filter('.single_track')->eq(1)->href();
 		$downloadUrl = $this->grep()->link('.single_track_320');
 		if($downloadUrl == null) {
@@ -66,7 +73,9 @@ class Ahaang
 	public function proccess()
 	{
 		$data = $this->featchDom();
-		return (new \App\Grep\Entity\Track())->grep($data);
+		if($data){
+			return (new \App\Grep\Entity\Track())->grep($data);
+		}
 	}
 
 }
