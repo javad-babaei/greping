@@ -12,8 +12,22 @@ class Track extends Api
 		]);
 	}
 
+	public function trackExists($data)
+	{
+		return $this->client()->request('GET', 'Track', [
+			'where[0][type]' => 'startsWith',
+			'where[0][attribute]' => 'translate',
+			'where[0][value]' => $data['translate']
+		])['total'];
+
+	}
+
 	public function grep($data)
 	{
+		$exists = $this->trackExists($data);
+		if(!$exists) {
+			return true;
+		}
 		// create entity
 		$track = $this->create($data);
 		$id = $track['id'];
@@ -88,6 +102,7 @@ class Track extends Api
 	public function FFMpeg($id, $data = null)
 	{
 		$filesource = '/home/apps/music/repository/track/' . $id . '.mp3';
+
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
