@@ -30,7 +30,7 @@ class Ahaang
 		} else {
 			$count = $this->grep()->filter('.single_text b')->count();
 
-			if($count >= 1) {
+			if($count >= 2) {
 				$name = $this->grep()->filter('.single_text b')->eq(0)->text();
 				$artist_name = $this->grep()->filter('.single_text b')->eq(1)->text();	
 			} else {
