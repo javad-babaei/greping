@@ -75,7 +75,12 @@ class Core
 	public function link($filter = null)
 	{
 		if($filter) {
-			return $this->grep->filter($filter)->first()->attr('href');
+			$count = $this->grep->filter($filter)->count();
+			if($count) {
+				return $this->grep->filter($filter)->first()->attr('href');	
+			}
+
+			return null;
 		}
 		return $this->dom->attr('href');
 	}

@@ -26,6 +26,7 @@ class Ahaang
 			$artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();	
 		} else {
 			$count = $this->grep()->filter('.single_text b')->count();
+
 			if($count >= 2) {
 				$name = $this->grep()->filter('.single_text b')->eq(0)->text();
 				$artist_name = $this->grep()->filter('.single_text b')->eq(1)->text();	
@@ -39,6 +40,9 @@ class Ahaang
 		
 		$trackUrl = $this->grep()->filter('.single_track')->eq(1)->href();
 		$downloadUrl = $this->grep()->link('.single_track_320');
+		if($downloadUrl == null) {
+			$downloadUrl = $trackUrl;
+		}
 		$translate = $this->grep()->text('.single_cover h2');		
 		$exploded = explode(' - ', $translate);
 		if(count($exploded)) {
