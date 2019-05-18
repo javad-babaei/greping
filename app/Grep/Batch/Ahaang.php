@@ -52,7 +52,7 @@ class Ahaang
 		}
 		$translate = $this->grep()->text('.single_cover h2');		
 		$exploded = explode(' - ', $translate);
-		if(count($exploded)) {
+		if(count($exploded) > 1) {
 			$translate = $exploded[1];
 		} 
 		
