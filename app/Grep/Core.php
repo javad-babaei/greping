@@ -62,8 +62,14 @@ class Core
 	public function img($filter = null, $attr = 'src')
 	{
 		if($filter) {
-			return $this->grep->filter($filter)->first()->attr($attr);
+			$node =  $this->grep->filter($filter);
+			if($node->count()){
+				return $this->grep->filter($filter)->first()->attr($attr);	
+			}
+
+			return $this->grep->filter('src')->first()->attr($attr);
 		}
+		
 		return $this->dom->attr($attr);
 	}
 
