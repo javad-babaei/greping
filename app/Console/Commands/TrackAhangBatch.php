@@ -44,11 +44,12 @@ class TrackAhangBatch extends Command
         $url = $this->argument('url');
         $artist = new Artist($url);
         $artist->add();
-        
+
         $track_links = $artist->getTrackLink();
         // $artist->getAlbum();
 
         foreach ($track_links as $track_link) {
+            dump($track_link);
 
             if($track_link){
                 (
@@ -56,9 +57,9 @@ class TrackAhangBatch extends Command
                 )->proccess();
             }
         }
-        
 
-        
+
+
 
         // get track
 

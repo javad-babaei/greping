@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Grep\Batch;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -19,7 +19,7 @@ class Artist
 	}
 
 	public function featchDom()
-	{	
+	{
 		$file_url =  $this->grep()->img('.profile_pic_main img', 'data-src');
 
 		return [
@@ -43,7 +43,7 @@ class Artist
 
 	public function getTrackLink()
 	{
-		
+
 		$list_url = "https://ahaang.com/query/profile-ajax-tab.php?tab=mp3&artist=" . urlencode(
 			str_replace(' ', '-', $this->data['name'])
 		);

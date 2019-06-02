@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace App\Grep\Entity;
 
 class Track extends Api
 {
 	public function create($data)
-	{	
+	{
 		return $this->client()->request('POST', 'Track', [
 			'name' => $data['name'],
 			'assignedUserName' => 'root',
@@ -25,9 +25,10 @@ class Track extends Api
 	public function grep($data)
 	{
 		$exists = $this->trackExists($data);
-		if(!$exists) {
+		if($exists) {
 			return true;
 		}
+        dump($exists);
 		// create entity
 		$track = $this->create($data);
 		$id = $track['id'];
@@ -86,10 +87,10 @@ class Track extends Api
 			$ch = curl_init(str_replace(" ","%20",$link));
 			curl_setopt($ch, CURLOPT_TIMEOUT, 50);
 			// write curl response to file
-			curl_setopt($ch, CURLOPT_FILE, $fp); 
+			curl_setopt($ch, CURLOPT_FILE, $fp);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 			// get curl response
-			curl_exec($ch); 
+			curl_exec($ch);
 			curl_close($ch);
 			fclose($fp);
 			return true;
@@ -114,7 +115,7 @@ class Track extends Api
 
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
-		
+
 		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 
@@ -133,7 +134,7 @@ class Track extends Api
 		]);
 
 		$ffprobe = \FFMpeg\FFProbe::create();
-		return $ffprobe->format($filename)->get('duration'); 
+		return $ffprobe->format($filename)->get('duration');
 	}
 
 }
