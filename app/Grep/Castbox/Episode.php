@@ -41,8 +41,8 @@ class Episode extends Api
 		$base_url = "https://podcast.app.beatsmusic.ir";
 		$data['hls'] = $base_url . "/podcast/segment/$id/episode.m3u8";
 		$data['stream'] = $base_url . "/podcast/stream/" . $id . '.aac';
-		$data['trackUrl'] = $base_url . "/podcast/" . $id . '.mp3';
-		$data['trackcover'] = $base_url . "/podcast/" . $id . '.jpg';
+		$data['trackUrl'] = $base_url . "/podcast/track/" . $id . '.mp3';
+		$data['trackcover'] = $base_url . "/podcast/cover/" . $id . '.jpg';
 		$duration = $this->FFMpeg($id, $data);
 		$data['duration'] = $duration;
 		// update track
