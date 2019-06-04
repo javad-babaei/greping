@@ -103,7 +103,7 @@ class Episode extends Api
 
 	public function FFMpeg($id, $data = null)
 	{
-		$filesource = '/home/apps/music/repository/episode/track/' . $id . '.mp3';
+		$filesource = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
 
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
@@ -115,7 +115,7 @@ class Episode extends Api
 		});
 
 		// need aac format ziped
-		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
+		$format->setAudioChannels(2)->setAudioKiloBitrate(192);
 
 		$filename = '/home/apps/music/repository/podcast/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
