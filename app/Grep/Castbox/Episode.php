@@ -48,7 +48,7 @@ class Episode extends Api
 		// update track
 		$this->updateEpisode($id, $data);
 		// related with artist
-		$this->relatedToChannel($data['channel'], $id);
+		$this->relatedToChannel($data['channel_id'], $id);
 	}
 
 	public function updateEpisode($id, $data)
@@ -56,24 +56,11 @@ class Episode extends Api
 		return $this->client()->request('PUT', 'Episode/' . $id, $data);
 	}
 
-	public function relatedToChannel($name, $id)
+	public function relatedToChannel($channel_id, $episode_id)
 	{
-		$name = trim($name, " ");
-		$name = trim($name);
-		$chaneel = $this->client()->request('GET', 'Channel', [
-			'where[0][type]' => 'equals',
-			'where[0][attribute]' => 'name',
-			'where[0][value]' => $name
+		$this->client()->request('POST', "Channel/$channel_id/episodes", [
+			'ids' => [ $episode_id ]
 		]);
-
-		if($chaneel['total']) {
-			$this->client()->request('POST', "episode/$id/channels", [
-				'ids' => [
-					$chaneel['list'][0]['id']
-				]
-			]);
-		}
-
 	}
 
 	public function downloadFile($link, $id, $type = null)
@@ -99,7 +86,7 @@ class Episode extends Api
 			fclose($fp);
 			return true;
 		}
-		
+
 		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
 		return true;
 	}
