@@ -70,16 +70,12 @@ class Crawller extends Core
 		$episode = $this->featchAllEpisode();
 
 		foreach ($episode as $item) {
-			dump($item);
 			$data = $this->featchEpisode($item);
 			$data['channel'] = $channel['name'];
 			$data['channel_id'] = $channel['id'];
 			(new Episode)->proccess($data);
-			dump($channel['name'] . "\n\r");
+			dump($item);
 		}
-
-
-		dd($this->data);
 	}
 
 
