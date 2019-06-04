@@ -4,9 +4,7 @@ namespace App\Grep\Castbox;
 
 use App\Grep\Core;
 use Symfony\Component\DomCrawler\Crawler;
-
-
-
+use App\Grep\Castbox\Episode;
 
 class Crawller extends Core
 {

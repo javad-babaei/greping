@@ -23,7 +23,7 @@ class Episode extends Api
 		])['total'];
 	}
 
-	public function grep($data)
+	public function proccess($data)
 	{
 		$exists = $this->trackExists($data);
 		if($exists) {
@@ -53,7 +53,7 @@ class Episode extends Api
 
 	public function updateEpisode($id, $data)
 	{
-		return $this->client()->request('PUT', 'Track/' . $id, $data);
+		return $this->client()->request('PUT', 'Episode/' . $id, $data);
 	}
 
 	public function relatedToChannel($name, $id)
@@ -67,7 +67,7 @@ class Episode extends Api
 		]);
 
 		if($chaneel['total']) {
-			$this->client()->request('POST', "track/$id/channels", [
+			$this->client()->request('POST', "episode/$id/channels", [
 				'ids' => [
 					$chaneel['list'][0]['id']
 				]
@@ -79,9 +79,9 @@ class Episode extends Api
 	public function downloadFile($link, $id, $type = null)
 	{
 		//This is the file where we save the    information
-		$filename = '/home/apps/music/repository/track/' . $id . '.mp3';
+		$filename = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
 		if($type) {
-			$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
+			$filename = '/home/apps/music/repository/podcast/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
 			$fp = fopen ( $filename , 'w+');
 			//Here is the file we are downloading, replace spaces with %20
@@ -103,7 +103,7 @@ class Episode extends Api
 
 	public function FFMpeg($id, $data = null)
 	{
-		$filesource = '/home/apps/music/repository/episode/' . $id . '.mp3';
+		$filesource = '/home/apps/music/repository/episode/track/' . $id . '.mp3';
 
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
@@ -117,7 +117,7 @@ class Episode extends Api
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 
-		$filename = '/home/apps/music/repository/episode/stream/' . $id . '.aac';
+		$filename = '/home/apps/music/repository/podcast/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 
 

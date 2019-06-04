@@ -30,7 +30,7 @@ class Channel extends Api
 		$channel = $this->create($data);
 		$id = $channel['id'];
 		// download
-		$base_url = "https://stream.app.beatsmusic.ir/podcast/cover/$id.jpg";
+		$base_url = "https://podcast.app.beatsmusic.ir/podcast/cover/$id.jpg";
 		$this->downloadFile($data['feedcover'], $id);
 
 		$data['feedcover'] = $base_url;
