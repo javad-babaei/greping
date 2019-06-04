@@ -68,11 +68,19 @@ class Crawller extends Core
 		);
 
 		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1324117&skip=0&limit=100&ascending=1&web=1";
-		$data = file_get_contents($url);
+		$aContext = array(
+		    'https' => array(
+		        'proxy' => 'tcp://128.106.14.227:8080',
+		        'request_fulluri' => true,
+		    ),
+		);
+		$cxContext = stream_context_create($aContext);
+		$data = file_get_contents($url, false, $cxContext);
 		$data = json_decode($data, true);
 		$episode = $data['data']['episode_list'];
 		
 		foreach ($episode as $item) {
+			dump($item['episode_id']);
 			$item['channel'] = $channel['name'];
 			$item['channel_id'] = $channel['id'];
 			(new Episode)->proccess($item);
