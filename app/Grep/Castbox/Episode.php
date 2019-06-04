@@ -114,7 +114,13 @@ class Episode extends Api
 		);
 
 		$context = stream_context_create($options);
-		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'), false, $context);
+
+		file_put_contents(
+			$filename , file_get_contents(
+				str_replace(" ","%20",$link)
+			)
+		);
+
 		return true;
 	}
 
