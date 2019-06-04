@@ -53,7 +53,7 @@ class Crawller extends Core
 			'name' => $grep->text('.trackinfo-titleBox h1'),
 			'description' => $grep->text('.trackinfo-des'),
 			'trackcover' => $grep->img('.coverImgContainer img'),
-			'stream' => $grep->filter('source')->first()->dom()->attr('src'),
+			'downloadUrl' => $grep->filter('source')->first()->dom()->attr('src'),
 			'update' => $grep->filter('.trackinfo-con-des')->first()->text(),
 		];
 	}

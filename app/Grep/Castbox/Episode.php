@@ -35,7 +35,7 @@ class Episode extends Api
 		$id = $track['id'];
 
 		// downloaded
-		$this->downloadFile($data['stream'], $id);
+		// $this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['trackcover'], $id, 'cover');
 		// upload data
 		$base_url = "https://podcast.app.beatsmusic.ir";
@@ -43,8 +43,8 @@ class Episode extends Api
 		$data['stream'] = $base_url . "/podcast/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/podcast/track/" . $id . '.mp3';
 		$data['trackcover'] = $base_url . "/podcast/cover/" . $id . '.jpg';
-		$duration = $this->FFMpeg($id, $data);
-		$data['duration'] = $duration;
+		// $duration = $this->FFMpeg($id, $data);
+		// $data['duration'] = $duration;
 		// update track
 		$this->updateEpisode($id, $data);
 		// related with artist
