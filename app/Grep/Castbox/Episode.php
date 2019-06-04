@@ -80,6 +80,9 @@ class Episode extends Api
 	{
 		//This is the file where we save the    information
 		$filename = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
+
+
+
 		if($type) {
 			$filename = '/home/apps/music/repository/podcast/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
@@ -97,12 +100,29 @@ class Episode extends Api
 			return true;
 		}
 
-		// https://media.blubrry.com/channelb/content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
-		// this is use for now https://content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
-		$link = str_replace("https://media.blubrry.com", "https://content.blubrry.com", $link);
+		$ch = curl_init(str_replace(" ","%20",$link));
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_NOBODY, 0);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+		$output = curl_exec($ch);
+		$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+		if ($status == 200) {
+		    file_put_contents($filename , $output);
+		}
 
-		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
 		return true;
+
+		// https://media.blubrry.com/channelb/content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
+		// https://content.blubrry.com/channelb/content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
+		// this is use for now https://content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
+		// $link = str_replace("https://media.blubrry.com", "https://content.blubrry.com", $link);
+
+		// file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
+		// return true;
 	}
 
 	public function FFMpeg($id, $data = null)
