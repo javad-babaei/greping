@@ -100,12 +100,12 @@ class Episode extends Api
 			return true;
 		}
 
-		// https://media.blubrry.com/channelb/content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
-		// https://content.blubrry.com/channelb/content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
+		// /channelb/ChannelB_Podcast_Episode_54.mp3
 		// this is use for now https://content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
-		// $link = str_replace(["https://media.blubrry.com"], ["https://content.blubrry.com"], $link);
-		file_put_contents($filename, fopen(str_replace(" ","%20",$link), 'r'));
-		// file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
+		$link = str_replace(
+			"https://media.blubrry.com/channelb/content.blubrry.com", "https://content.blubrry.com", $link
+		);
+		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
 		return true;
 	}
 
