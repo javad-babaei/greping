@@ -50,7 +50,7 @@ class Crawller extends Core
 		$grep = $this->newCore($url);
 
 		return [
-			'name' => $grep->text('.ch_feed_info h1'),
+			'name' => $grep->text('.trackinfo-titleBox h1'),
 			'description' => $grep->text('.trackinfo-des'),
 			'trackcover' => $grep->img('.coverImgContainer img'),
 			'stream' => $grep->filter('source')->first()->dom()->attr('src'),
