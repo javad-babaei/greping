@@ -40,8 +40,9 @@ class Crawller extends Core
 
 	public function featchAllEpisode()
 	{
-		return $this->grep()->filter('.trackListCon_list .episodeRow a')->dom()->each(function(Crawler $node, $i){
-				return "https://castbox.fm" . $node->attr('href');
+		$dom = $this->grep()->filter('.A_link')->dom()->click();
+		return $this->grep()->filter('a.ctrlItem')->dom()->each(function(Crawler $node, $i){
+				return $node->attr('href');
 		});
 	}
 
@@ -66,15 +67,15 @@ class Crawller extends Core
 			$this->featchChannel()
 		);
 
-		//
-		$episode = $this->featchAllEpisode();
-
+		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1324117&skip=0&limit=100&ascending=1&web=1";
+		$data = file_get_contents($url);
+		$data = json_decode($data, true);
+		$episode = $data['data']['episode_list'];
+		
 		foreach ($episode as $item) {
-			$data = $this->featchEpisode($item);
-			$data['channel'] = $channel['name'];
-			$data['channel_id'] = $channel['id'];
-			(new Episode)->proccess($data);
-			dump($item);
+			$item['channel'] = $channel['name'];
+			$item['channel_id'] = $channel['id'];
+			(new Episode)->proccess($item);
 		}
 	}
 

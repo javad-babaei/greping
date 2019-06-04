@@ -8,7 +8,7 @@ class Episode extends Api
 	public function create($data)
 	{
 		return $this->client()->request('POST', 'Episode', [
-			'name' => $data['name'],
+			'name' => $data['title'],
 			'assignedUserName' => 'root',
 			'assignedUserId' => 1
 		]);
@@ -19,7 +19,7 @@ class Episode extends Api
 		return $this->client()->request('GET', 'Episode', [
 			'where[0][type]' => 'startsWith',
 			'where[0][attribute]' => 'name',
-			'where[0][value]' => $data['name']
+			'where[0][value]' => $data['title']
 		])['total'];
 	}
 
@@ -35,14 +35,17 @@ class Episode extends Api
 		$id = $track['id'];
 
 		// downloaded
-		// $this->downloadFile($data['downloadUrl'], $id);
-		$this->downloadFile($data['trackcover'], $id, 'cover');
+		$this->downloadFile($data['url'], $id);
+		$this->downloadFile($data['big_cover_url'], $id, 'cover');
 		// upload data
 		$base_url = "https://podcast.app.beatsmusic.ir";
 		$data['hls'] = $base_url . "/podcast/segment/$id/episode.m3u8";
 		$data['stream'] = $base_url . "/podcast/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/podcast/track/" . $id . '.mp3';
 		$data['trackcover'] = $base_url . "/podcast/cover/" . $id . '.jpg';
+		$data['releasedate'] = $data['release_date'];
+		$data['downloadcount'] = $data['download_count'];
+		$data['likes'] = $data['like_count'];
 		// $duration = $this->FFMpeg($id, $data);
 		// $data['duration'] = $duration;
 		// update track
