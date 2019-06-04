@@ -1,5 +1,5 @@
 <?php
-namespace App\Grep\Entity;
+namespace App\Grep\Castbox;
 
 class Episode extends Api
 {
