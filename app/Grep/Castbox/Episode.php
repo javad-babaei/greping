@@ -99,28 +99,8 @@ class Episode extends Api
 			fclose($fp);
 			return true;
 		}
-
-		// /channelb/ChannelB_Podcast_Episode_54.mp3
-		// this is use for now https://content.blubrry.com/channelb/ChannelB_Podcast_Episode_54.mp3
-		// $link = str_replace(
-		// 	"https://media.blubrry.com/channelb/content.blubrry.com", "https://content.blubrry.com", $link
-		// );
-		$options = array(
-			'http'=>array(
-				'method'=>"GET",
-				'header'=>"Accept-language: en\r\n" .
-				"User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" 
-			)
-		);
-
-		$context = stream_context_create($options);
-
-		file_put_contents(
-			$filename , file_get_contents(
-				str_replace(" ","%20",$link)
-			)
-		);
-
+		
+		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
 		return true;
 	}
 
