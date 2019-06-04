@@ -1,6 +1,8 @@
 <?php
 namespace App\Grep\Castbox;
 
+use App\Grep\Entity\Api;
+
 class Episode extends Api
 {
 	public function create($data)
