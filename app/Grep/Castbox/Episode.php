@@ -43,9 +43,11 @@ class Episode extends Api
 		$data['stream'] = $base_url . "/podcast/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/podcast/track/" . $id . '.mp3';
 		$data['trackcover'] = $base_url . "/podcast/cover/" . $id . '.jpg';
-		$data['releasedate'] = $data['release_date'];
+		
 		$data['downloadcount'] = $data['download_count'];
 		$data['likes'] = $data['like_count'];
+		$date = new DateTime($data['release_date']);
+		$data['releasedate'] = $date->format("Y-m-d h:m:s");
 		// $duration = $this->FFMpeg($id, $data);
 		// $data['duration'] = $duration;
 		// update track
@@ -99,22 +101,22 @@ class Episode extends Api
 		$filesource = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
 
 
-		// $ffmpeg = \FFMpeg\FFMpeg::create();
-		// $audio = $ffmpeg->open($filesource);
+		$ffmpeg = \FFMpeg\FFMpeg::create();
+		$audio = $ffmpeg->open($filesource);
 
-		// $format = new \FFMpeg\Format\Audio\Aac();
-		// $format->on('progress', function ($audio, $format, $percentage) {
-		    // echo "$percentage % transcoded" . PHP_EOL;
-		// });
+		$format = new \FFMpeg\Format\Audio\Aac();
+		$format->on('progress', function ($audio, $format, $percentage) {
+		    echo "$percentage % transcoded" . PHP_EOL;
+		});
 
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(192);
 
-		// $filename = '/home/apps/music/repository/podcast/stream/' . $id . '.aac';
-		// $audio->save($format, $filename);
+		$filename = '/home/apps/music/repository/podcast/stream/' . $id . '.aac';
+		$audio->save($format, $filename);
 
 
-		/**
+
 		$ffmpeg = \FFMpeg\FFMpeg::create();
 		$audio = $ffmpeg->open($filesource);
 		$audio->filters()->addMetadata([
@@ -126,7 +128,6 @@ class Episode extends Api
 			"description" => "api services from https://beatsmusic.ir",
 			"lyrics" => $data['lyric']
 		]);
-		**/
 
 		$ffprobe = \FFMpeg\FFProbe::create();
 		return $ffprobe->format($filename)->get('duration');
