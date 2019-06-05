@@ -49,6 +49,7 @@ class Episode extends Api
 		$data['playcount'] = $data['play_count'];
 		$date = new \DateTime($data['release_date']);
 		$data['releasedate'] = $date->format("Y-m-d h:m:s");
+		$data['website'] = urlencode($data['website']);
 		// $duration = $this->FFMpeg($id, $data);
 		// $data['duration'] = $duration;
 		// update track
