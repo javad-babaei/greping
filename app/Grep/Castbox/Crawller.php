@@ -30,6 +30,7 @@ class Crawller extends Core
 	{	
 		return [
 			'name' => $this->grep()->text('.ch_feed_info h1'),
+			'played' => $this->grep()->text('.play_count'),
 			'description' => $this->grep()->text('.des-con div'),
 			'author' => str_replace(
 				"Author:", "", $this->grep()->text('.author')
@@ -67,7 +68,7 @@ class Crawller extends Core
 			$this->featchChannel()
 		);
 
-		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1482589&skip=0&limit=50&ascending=0&web=1";
+		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1475736&skip=0&limit=50&ascending=1&web=1";
 		$aContext = array(
 		    'http' => array(
 		        'proxy' => 'tcp://128.106.14.227:8080',
