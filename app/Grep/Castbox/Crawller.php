@@ -10,7 +10,6 @@ class Crawller extends Core
 {
 	protected $core;
 	protected $data;
-	protected $url;
 	public function __construct($url)
 	{
 		$this->url = $url;
@@ -70,7 +69,7 @@ class Crawller extends Core
 			$this->featchChannel()
 		);
 
-		$episode_id = basename($this->url);
+		$episode_id = basename($this->core->url);
 		preg_match('/[0-9]+$/', $episode_id , $id);
 
 		$url = "https://everest.castbox.fm/data/episode_list/v2?cid={$id}&skip=0&limit=100&ascending=1&web=1";
