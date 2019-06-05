@@ -46,6 +46,7 @@ class Episode extends Api
 		
 		$data['downloadcount'] = $data['download_count'];
 		$data['likes'] = $data['like_count'];
+		$data['playcount'] = $data['play_count'];
 		$date = new \DateTime($data['release_date']);
 		$data['releasedate'] = $date->format("Y-m-d h:m:s");
 		// $duration = $this->FFMpeg($id, $data);

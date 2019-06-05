@@ -67,7 +67,7 @@ class Crawller extends Core
 			$this->featchChannel()
 		);
 
-		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1324117&skip=0&limit=100&ascending=1&web=1";
+		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1482589&skip=0&limit=50&ascending=0&web=1";
 		$aContext = array(
 		    'http' => array(
 		        'proxy' => 'tcp://128.106.14.227:8080',
