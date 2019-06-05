@@ -35,7 +35,7 @@ class Episode extends Api
 		$id = $track['id'];
 
 		// downloaded
-		$this->downloadFile($data['url'], $id);
+		// $this->downloadFile($data['url'], $id);
 		$this->downloadFile($data['big_cover_url'], $id, 'cover');
 		// upload data
 		$base_url = "https://podcast.app.beatsmusic.ir";
