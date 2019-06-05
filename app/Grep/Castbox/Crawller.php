@@ -69,7 +69,7 @@ class Crawller extends Core
 
 		$url = "https://everest.castbox.fm/data/episode_list/v2?cid=1324117&skip=0&limit=100&ascending=1&web=1";
 		$aContext = array(
-		    'https' => array(
+		    'http' => array(
 		        'proxy' => 'tcp://128.106.14.227:8080',
 		        'request_fulluri' => true,
 		    ),
