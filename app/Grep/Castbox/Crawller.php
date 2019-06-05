@@ -72,7 +72,7 @@ class Crawller extends Core
 		$episode_id = basename($this->core->url);
 		preg_match('/[0-9]+$/', $episode_id , $id);
 
-		$url = "https://everest.castbox.fm/data/episode_list/v2?cid={$id}&skip=0&limit=100&ascending=1&web=1";
+		$url = "https://everest.castbox.fm/data/episode_list/v2?cid={$id[0]}&skip=0&limit=100&ascending=1&web=1";
 		$aContext = array(
 		    'http' => array(
 		        'proxy' => 'tcp://128.106.14.227:8080',
