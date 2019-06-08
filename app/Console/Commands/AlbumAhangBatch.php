@@ -21,7 +21,7 @@ class AlbumAhangBatch extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '';
 
     /**
      * Create a new command instance.
@@ -40,36 +40,11 @@ class AlbumAhangBatch extends Command
      */
     public function handle()
     {
-        // get artist
+
         $url = $this->argument('url');
-        // get album link
-        // create album
-
-        // each track name
-        // link track id
         $album = new Album($url);
-        
-        $album->add();
-        dd($album);
-
-        $track_links = $artist->getTrackLink();
-        // $artist->getAlbum();
-
-        foreach ($track_links as $track_link) {
-            dump($track_link);
-
-            if($track_link){
-                (
-                    new Ahaang($track_link)
-                )->proccess();
-            }
-        }
-
-
-
-
-        // get track
-
-
+        $album->getAlbumByLink();
+        $album->getTrackLinks();
+        $album->getTrackNameAndAttachToAlbum();
     }
 }
