@@ -19,7 +19,14 @@ class Track extends Api
 			'where[0][attribute]' => 'translate',
 			'where[0][value]' => $data['translate']
 		])['total'];
-
+	}
+	public function findByName($name)
+	{
+		return $this->client()->request('GET', 'Track', [
+			'where[0][type]' => 'contains',
+			'where[0][attribute]' => 'name',
+			'where[0][value]' => $name
+		]);
 	}
 
 	public function grep($data)
@@ -52,6 +59,13 @@ class Track extends Api
 
 	public function updateTrack($id, $data)
 	{
+		if(isset($data['albumId'])) {
+			$this->client()->request('POST', "Album/$id/tracks", [
+				'ids' => [
+					$id
+				]
+			]);
+		}
 		return $this->client()->request('PUT', 'Track/' . $id, $data);
 	}
 
