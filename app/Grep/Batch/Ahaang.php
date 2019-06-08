@@ -7,6 +7,7 @@ use App\Grep\Core;
 class Ahaang 
 {
 	protected $core;
+	public $album;
 	public function __construct($url)
 	{
 		$this->core = new Core($url);
@@ -74,6 +75,10 @@ class Ahaang
 	{
 		$data = $this->featchDom();
 		if($data){
+			if($this->album){
+				$data['albumId'] = $this->album['id'];
+				$data['albumName'] = $this->album['name'];	
+			}
 			return (new \App\Grep\Entity\Track())->grep($data);
 		}
 	}
