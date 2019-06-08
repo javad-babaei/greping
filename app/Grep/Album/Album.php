@@ -1,5 +1,5 @@
 <?php 
-namespace App\Grep;
+namespace App\Grep\Album;
 
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -35,8 +35,25 @@ class Album
 		$data = $this->featchDom();
 		dd($data);
 		(
-			new \App\Grep\Entity\Artist
+			new \App\Grep\Entity\Album
 		)->grep($data);
+	}
+
+	public function getTrackLinkByAlbum()
+	{
+
+		$list_url = "https://ahaang.com/query/profile-ajax-tab.php?tab=mp3&artist=" . urlencode(
+			str_replace(' ', '-', $this->data['name'])
+		);
+
+		$core = new Core($list_url);
+		$list = $core->filter('.profile_box_body a')->dom()->each(function(Crawler $node, $i){
+			if(!$node->filter('.soon')->count()) {
+				return $node->attr('href');
+			}
+		});
+
+		return $list;
 	}
 
 }
