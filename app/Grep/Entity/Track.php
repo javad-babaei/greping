@@ -60,7 +60,8 @@ class Track extends Api
 	public function updateTrack($id, $data)
 	{
 		if(isset($data['albumId'])) {
-			$this->client()->request('POST', "Album/$id/tracks", [
+			$albumId = $data['albumId'];
+			$this->client()->request('POST', "Album/$albumId/tracks", [
 				'ids' => [
 					$id
 				]

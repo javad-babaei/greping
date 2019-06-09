@@ -19,7 +19,7 @@ class Album extends Api
 		$id = $artist['id'];
 		// download
 		$base_url = "https://stream.app.beatsmusic.ir/cover/$id.jpg";
-		// $this->downloadFile($data['cover'], $id);
+		$this->downloadFile($data['cover'], $id);
 		unset($data['tracks']);
 
 		$data['cover'] = $base_url;
