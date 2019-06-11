@@ -3,6 +3,7 @@ namespace App\Grep\Album;
 
 use Symfony\Component\DomCrawler\Crawler;
 use App\Grep\Core;
+use App\Grep\Batch\Ahaang;
 
 class AlbumAhang 
 {
