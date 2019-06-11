@@ -3,18 +3,18 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Grep\Batch\Album;
+use App\Grep\Album\AlbumAhang as Crawller;
 use App\Grep\Batch\Ahaang;
 
 
-class AlbumAhangBatch extends Command
+class AlbumAhang extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'grep:album-batch {url}';
+    protected $signature = 'grep:album {url}';
 
     /**
      * The console command description.
@@ -42,8 +42,9 @@ class AlbumAhangBatch extends Command
     {
 
         $url = $this->argument('url');
-        $album = new Album($url);
-        $album->getAlbumByLink();
+        $album = new Crawller($url);
+        $album->add();
+        die;
         $album->getTrackLinks();
         $album->getTrackNameAndAttachToAlbum();
     }

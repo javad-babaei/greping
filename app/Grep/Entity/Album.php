@@ -23,7 +23,7 @@ class Album extends Api
 		unset($data['tracks']);
 
 		$data['cover'] = $base_url;
-		$this->updateAlbum($data, $id);
+		return $this->updateAlbum($data, $id);
 	}
 
 	public function updateAlbum($data, $id)
