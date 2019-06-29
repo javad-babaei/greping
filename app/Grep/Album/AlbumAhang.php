@@ -34,7 +34,7 @@ class AlbumAhang
 		return [
 			'name' => $name,
 			'translate' => $this->grep()->text('.single_cover h2'),
-			'published' => $this->grep()->text('.icon-calendar'),
+			'publishedDate' => $this->grep()->text('.icon-calendar'),
 			'artistName' => $this->grep()->text('.single_text p b'),
 			'cover' => $file_url,
 			'tracks' => $tracks
