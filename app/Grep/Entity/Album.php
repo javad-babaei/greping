@@ -18,7 +18,7 @@ class Album extends Api
 		$artist = $this->create($data);
 		$id = $artist['id'];
 		// download
-		$base_url = "https://stream.app.beatsmusic.ir/cover/$id.jpg";
+		$base_url = "https://cdn.sound.snapycloud.com/cover/$id.jpg";
 		$this->downloadFile($data['cover'], $id);
 		unset($data['tracks']);
 
@@ -35,7 +35,7 @@ class Album extends Api
 	{
 		set_time_limit(0);
 		//This is the file where we save the    information
-		$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
+		$filename = '/usr/share/nginx/music/repository/cover/' . $id . '.jpg';
 		// file_put_contents($filename , fopen($link, 'r'));
 		
 		$fp = fopen ( $filename , 'w+');

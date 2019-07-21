@@ -44,7 +44,7 @@ class Track extends Api
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['img'], $id, 'cover');
 		// upload data
-		$base_url = "https://stream.app.beatsmusic.ir";
+		$base_url = "https://cdn.sound.snapycloud.com";
 		$data['segmentlist'] = $base_url . "/track/segment/$id/track.m3u8";
 		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/track/" . $id . '.mp3';
@@ -93,9 +93,9 @@ class Track extends Api
 	public function downloadFile($link, $id, $type = null)
 	{
 		//This is the file where we save the    information
-		$filename = '/home/apps/music/repository/track/' . $id . '.mp3';
+		$filename = '/usr/share/nginx/music/repository/track/' . $id . '.mp3';
 		if($type) {
-			$filename = '/home/apps/music/repository/cover/' . $id . '.jpg';
+			$filename = '/usr/share/nginx/music/repository/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
 			$fp = fopen ( $filename , 'w+');
 			//Here is the file we are downloading, replace spaces with %20
@@ -117,7 +117,7 @@ class Track extends Api
 
 	public function FFMpeg($id, $data = null)
 	{
-		$filesource = '/home/apps/music/repository/track/' . $id . '.mp3';
+		$filesource = '/usr/share/nginx/music/repository/track/' . $id . '.mp3';
 
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
@@ -131,7 +131,7 @@ class Track extends Api
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 
-		$filename = '/home/apps/music/repository/track/stream/' . $id . '.aac';
+		$filename = '/usr/share/nginx/music/repository/track/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 
 
