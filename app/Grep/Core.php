@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Grep;
 
@@ -51,7 +51,7 @@ class Core
 		if($filter) {
 			$dom = $this->grep->filter($filter);
 			if($dom->count()) {
-				return $dom->first()->text();	
+				return $dom->first()->text();
 			}
 
 			return '';
@@ -64,12 +64,18 @@ class Core
 		if($filter) {
 			$node =  $this->grep->filter($filter);
 			if($node->count()){
-				return $this->grep->filter($filter)->first()->attr($attr);	
+				return $this->grep->filter($filter)->first()->attr($attr);
 			}
 
-			return $this->grep->filter('src')->first()->attr($attr);
+            $filter = ".profile_pic img";
+			$node =  $this->grep->filter($filter);
+			if($node->count()){
+				return $this->grep->filter($filter)->first()->attr($attr);
+			}
+
+			return $this->grep->filter($filter)->first()->attr($attr);
 		}
-		
+
 		return $this->dom->attr($attr);
 	}
 
@@ -83,7 +89,7 @@ class Core
 		if($filter) {
 			$count = $this->grep->filter($filter)->count();
 			if($count) {
-				return $this->grep->filter($filter)->first()->attr('href');	
+				return $this->grep->filter($filter)->first()->attr('href');
 			}
 
 			return null;
