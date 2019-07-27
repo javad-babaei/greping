@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79ddd362e36db96eec6306c305d70ea7",
+    "content-hash": "15b0fd3216324b1ea8788608d5043315",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -2035,6 +2035,60 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sallar/jdatetime",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sallar/jDateTime.git",
+                "reference": "0e6028c1a5019af57705b1d2e624db6cd9d0646d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sallar/jDateTime/zipball/0e6028c1a5019af57705b1d2e624db6cd9d0646d",
+                "reference": "0e6028c1a5019af57705b1d2e624db6cd9d0646d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "jdatetime.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sallar Kaboli",
+                    "role": "Developer",
+                    "email": "sallar.kaboli@gmail.com",
+                    "homepage": "http://sallar.me"
+                }
+            ],
+            "description": "Jalali (Shamsi) DateTime class written in PHP, Supports year higher than 2038",
+            "homepage": "http://sallar.me/projects/jdatetime/",
+            "keywords": [
+                "Jalali",
+                "date",
+                "datetime",
+                "farsi",
+                "iran",
+                "jalalidate",
+                "jdatetime",
+                "persian",
+                "shamsi",
+                "time"
+            ],
+            "time": "2017-04-17T07:07:23+00:00"
         },
         {
             "name": "snapycloud/php-api",
@@ -5241,6 +5295,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "sallar/jdatetime": 20,
         "snapycloud/php-api": 20
     },
     "prefer-stable": true,
