@@ -18,7 +18,7 @@ class Artist extends Api
 		$artist = $this->create($data);
 		$id = $artist['id'];
 		// download
-		$base_url = "https://cdn.sound.snapycloud.com/cover/$id.jpg";
+		$base_url = "/cover/$id.jpg";
 		$this->downloadFile($data['cover'], $id);
 
 		$data['cover'] = $base_url;

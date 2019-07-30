@@ -43,8 +43,9 @@ class Track extends Api
 		// downloaded
 		$this->downloadFile($data['downloadUrl'], $id);
 		$this->downloadFile($data['img'], $id, 'cover');
-		// upload data
-		$base_url = "https://cdn.sound.snapycloud.com";
+		// upload databeatsmusic
+		// $base_url = "https://stream.app..ir";
+		$base_url = "";
 		$data['segmentlist'] = $base_url . "/track/segment/$id/track.m3u8";
 		$data['stream'] = $base_url . "/track/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/track/" . $id . '.mp3';
