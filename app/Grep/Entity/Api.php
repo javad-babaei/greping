@@ -10,7 +10,7 @@ class Api
 
 	public function __construct()
 	{
-		$this->client = new SnapyClient("https://service.app.beatsmusic.ir");
+		$this->client = new SnapyClient("https://service.sound.snapycloud.com");
 		$this->client->setApiKey('872d14e8b3fdd69b8b31fa2866af18a2');
 		$this->client->setSecretKey('1908a40926c27e383dd17b669aa0050c');
 	}

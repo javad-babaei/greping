@@ -20,12 +20,12 @@ class Album
 
 	public function core($url)
 	{
-		return new Core($url);	
+		return new Core($url);
 	}
 
 	public function createAlbum($data)
 	{
-		
+
 	}
 
 	public function getTrackNameAndAttachToAlbum()
@@ -61,7 +61,7 @@ class Album
 
 
 		$file_url =  $core->img('.single_pic img', 'data-src');
-		
+
 		return [
 			'artistName' => $core->text('ul .icon-person a'),
 			'name' => $core->filter('.single_text p strong')->dom->eq(2)->text(),
@@ -113,6 +113,7 @@ class Album
 		$list_url = "https://ahaang.com/query/profile-ajax-tab.php?tab=album&artist=" . urlencode(
 			str_replace(' ', '-', $this->data['name'])
 		);
+        dump($list_url);
 
 		$core = new Core($list_url);
 		$list = $core->filter('.profile_box_body a')->dom()->each(function(Crawler $node, $i){

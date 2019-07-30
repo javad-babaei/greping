@@ -74,6 +74,7 @@ class Ahaang
 	public function proccess()
 	{
 		$data = $this->featchDom();
+		dump($data);
 		if($data){
 			if($this->album){
 				$data['albumId'] = $this->album['id'];
