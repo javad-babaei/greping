@@ -12,7 +12,7 @@ class GreptorMp3 extends Command
      *
      * @var string
      */
-    protected $signature = 'grep:mp3';
+    protected $signature = 'auto-grep:mp3';
 
     /**
      * The console command description.

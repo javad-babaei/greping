@@ -14,7 +14,7 @@ class GreptorArtistWithTrack extends Command
      *
      * @var string
      */
-    protected $signature = 'grep:mp3';
+    protected $signature = 'auto-grep:artist';
 
     /**
      * The console command description.
