@@ -57,6 +57,8 @@ class Track extends Api
 		$duration = $this->FFMpeg($id, $data);
 		$data['duration'] = $duration;
 		$data['publishedDate'] = $this->normalizeDate($data['published']);
+		$data['likes'] = rand(200, 20000);
+		$data['plays'] = rand(200, 20000);
 		// update track
 		$this->updateTrack($id, $data);
 		// related with artist
