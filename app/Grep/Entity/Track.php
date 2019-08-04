@@ -1,8 +1,12 @@
 <?php
 namespace App\Grep\Entity;
 
+use App\Traits\PublishDate;
+
 class Track extends Api
 {
+	use PublishDate;
+
 	public function create($data)
 	{
 		return $this->client()->request('POST', 'Track', [
@@ -52,6 +56,7 @@ class Track extends Api
 		$data['img'] = $base_url . "/cover/" . $id . '.jpg';
 		$duration = $this->FFMpeg($id, $data);
 		$data['duration'] = $duration;
+		$data['publishedDate'] = $this->normalizeDate($data['published']);
 		// update track
 		$this->updateTrack($id, $data);
 		// related with artist
