@@ -12,8 +12,21 @@ class Artist extends Api
 		]);
 	}
 
+	public function ifExistsArtis($data)
+	{
+		return $this->client()->request('GET', 'Artist', [
+			"where[0][type]" => "contains",
+			"where[0][attribute]" => "name",
+			"where[0][value]" => $data['name']
+		])['total'];
+	}
+
 	public function grep($data)
 	{
+		// chech not exists
+		if($this->ifExistsArtis($data)){
+			return true;
+		}
 		// create
 		$artist = $this->create($data);
 		$id = $artist['id'];
