@@ -40,6 +40,10 @@ class GreptorMp3 extends Command
     {
         $request = Model::where('done', 0)->where('type', 'track')->first();
 
+        if(!$request) {
+            return false;
+        }
+
         try {
 
             $grep = new \App\Grep\TrackAhaang($request->link);
