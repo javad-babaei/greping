@@ -1,8 +1,11 @@
 <?php 
 namespace App\Grep\Entity;
 
+use App\Traits\PublishDate;
+
 class Album extends Api
 {
+	use PublishDate;
 	public function create($data)
 	{
 		return $this->client()->request('POST', 'Album', [
@@ -15,14 +18,18 @@ class Album extends Api
 	public function grep($data)
 	{
 		// create
-		$artist = $this->create($data);
-		$id = $artist['id'];
+		$album = $this->create($data);
+		$id = $album['id'];
 		// download
-		$base_url = "https://cdn.sound.snapycloud.com/cover/$id.jpg";
+		$base_url = "/cover/$id.jpg";
 		$this->downloadFile($data['cover'], $id);
 		unset($data['tracks']);
 
+
 		$data['cover'] = $base_url;
+		$data['publishedDate'] = $this->normalizeDate($data['published']);
+		$data['likes'] = rand(200, 20000);
+		$data['plays'] = rand(200, 20000);
 		return $this->updateAlbum($data, $id);
 	}
 
