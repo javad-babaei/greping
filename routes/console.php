@@ -7,7 +7,7 @@ use Illuminate\Foundation\Inspiring;
 
 Artisan::command('update:album', function(){
 
-	$album = \App\Album::where([
+	$album = \App\Albums::where([
 		'deleted' => 0,
 	])->get();
 
@@ -15,7 +15,7 @@ Artisan::command('update:album', function(){
 		$cover = str_replace("https://stream.app.beatsmusic.ir", "", $item->cover);
 		$item->cover = $cover;
 		$item->save();
-        echo "Done. " .$item->id;
+        echo "Done. " .$item->id . "\r\n";
 	}
 });
 
