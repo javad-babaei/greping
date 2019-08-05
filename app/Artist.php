@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artist extends Model
 {
-    protected $tables = 'artist';
+    protected $table = 'artist';
     protected $hidden = [];
 
     protected $casts = [
         'id' => 'string',
     ];
+
+    public $timestamps = false;
 }

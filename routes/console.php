@@ -5,16 +5,15 @@ use Illuminate\Foundation\Inspiring;
 
 Artisan::command('update:artist', function(){
 
-	$artist = Artist::where([
+	$artist = \App\Artist::where([
 		'deleted' => 0,
 	])->get();
 
 	foreach ($artist as $item) {
-		dump($item);
 		$cover = str_replace("https://stream.app.beatsmusic.ir", "", $item->cover);
 		$item->cover = $cover;
 		$item->save();
-		dd($item);
+        echo "Done. " .$item->id;
 	}
 });
 
