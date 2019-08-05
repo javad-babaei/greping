@@ -3,6 +3,23 @@
 use Illuminate\Foundation\Inspiring;
 
 
+
+
+Artisan::command('update:album', function(){
+
+	$album = \App\Album::where([
+		'deleted' => 0,
+	])->get();
+
+	foreach ($album as $item) {
+		$cover = str_replace("https://stream.app.beatsmusic.ir", "", $item->cover);
+		$item->cover = $cover;
+		$item->save();
+        echo "Done. " .$item->id;
+	}
+});
+
+
 Artisan::command('update:artist', function(){
 
 	$artist = \App\Artist::where([
