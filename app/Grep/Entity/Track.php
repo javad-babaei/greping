@@ -18,10 +18,14 @@ class Track extends Api
 
 	public function trackExists($data)
 	{
+
 		return $this->client()->request('GET', 'Track', [
 			'where[0][type]' => 'startsWith',
 			'where[0][attribute]' => 'translate',
-			'where[0][value]' => $data['translate']
+			'where[0][value]' => $data['translate'],
+			'where[1][type]' => 'startsWith',
+			'where[1][attribute]' => 'artist',
+			'where[1][value]' => $data['artist']
 		])['total'];
 	}
 	public function findByName($name)
