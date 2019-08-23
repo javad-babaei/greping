@@ -14,18 +14,22 @@ class Channel extends Api
 		]);
 	}
 
-	public function checkIfNotExists($name)
+	public function checkIfNotExists($data)
 	{
-		# code...
+		return $this->client()->request('GET', 'Channel', [
+			'where[0][type]' => 'contains',
+			'where[0][attribute]' => 'name',
+			'where[0][value]' => $data['name']
+		]);
 	}
 
 	public function proccess($data)
 	{
 		// check not exitst
-		// $exists = $this->checkIfNotExists($data['name']);
-		// if($exists) {
-		// 	return false;
-		// }
+		$exists = $this->checkIfNotExists($data);
+		if($exists['total']) {
+			return $exists['list'][0];
+		}
 		// create
 		$channel = $this->create($data);
 		$id = $channel['id'];

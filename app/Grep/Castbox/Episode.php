@@ -38,7 +38,7 @@ class Episode extends Api
 		// $this->downloadFile($data['url'], $id);
 		$this->downloadFile($data['big_cover_url'], $id, 'cover');
 		// upload data
-		$base_url = "https://podcast.app.beatsmusic.ir";
+		$base_url = "";
 		$data['hls'] = $base_url . "/podcast/segment/$id/episode.m3u8";
 		$data['stream'] = $base_url . "/podcast/stream/" . $id . '.aac';
 		$data['trackUrl'] = $base_url . "/podcast/track/" . $id . '.mp3';
@@ -73,12 +73,12 @@ class Episode extends Api
 	public function downloadFile($link, $id, $type = null)
 	{
 		//This is the file where we save the    information
-		$filename = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
+		$filename = '/usr/share/nginx/music/repository/podcast/track/' . $id . '.mp3';
 
 
 
 		if($type) {
-			$filename = '/home/apps/music/repository/podcast/cover/' . $id . '.jpg';
+			$filename = '/usr/share/nginx/music/repository/podcast/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
 			$fp = fopen ( $filename , 'w+');
 			//Here is the file we are downloading, replace spaces with %20
@@ -100,7 +100,7 @@ class Episode extends Api
 
 	public function FFMpeg($id, $data = null)
 	{
-		$filesource = '/home/apps/music/repository/podcast/track/' . $id . '.mp3';
+		$filesource = '/usr/share/nginx/music/repository/podcast/track/' . $id . '.mp3';
 
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
@@ -114,7 +114,7 @@ class Episode extends Api
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(192);
 
-		$filename = '/home/apps/music/repository/podcast/stream/' . $id . '.aac';
+		$filename = '/usr/share/nginx/music/repository/podcast/stream/' . $id . '.aac';
 		$audio->save($format, $filename);
 
 
