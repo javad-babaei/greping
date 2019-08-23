@@ -17,7 +17,7 @@ class Episode extends Api
 	public function trackExists($data)
 	{
 		return $this->client()->request('GET', 'Episode', [
-			'where[0][type]' => 'startsWith',
+			'where[0][type]' => 'contains',
 			'where[0][attribute]' => 'name',
 			'where[0][value]' => $data['title']
 		])['total'];
