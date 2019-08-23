@@ -34,7 +34,7 @@ class Channel extends Api
 		$channel = $this->create($data);
 		$id = $channel['id'];
 		// download
-		$base_url = "https://podcast.app.beatsmusic.ir/podcast/cover/$id.jpg";
+		$base_url = "/podcast/cover/$id.jpg";
 		$this->downloadFile($data['feedcover'], $id);
 
 		$data['feedcover'] = $base_url;
@@ -51,7 +51,7 @@ class Channel extends Api
 	{
 		set_time_limit(0);
 		//This is the file where we save the    information
-		$filename = '/home/apps/music/repository/podcast/cover/' . $id . '.jpg';
+		$filename = '/usr/share/nginx/music/repository/podcast/cover/' . $id . '.jpg';
 		// file_put_contents($filename , fopen($link, 'r'));
 		
 		$fp = fopen ( $filename , 'w+');
