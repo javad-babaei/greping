@@ -27,7 +27,7 @@ class Album extends Api
 
 
 		$data['cover'] = $base_url;
-		$data['publishedDate'] = $this->normalizeDate($data['published']);
+		$data['published'] = $this->normalizeDate($data['publishedDate']);
 		$data['likes'] = rand(200, 20000);
 		$data['plays'] = rand(200, 20000);
 		return $this->updateAlbum($data, $id);
