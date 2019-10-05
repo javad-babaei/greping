@@ -3,6 +3,54 @@
 use Illuminate\Foundation\Inspiring;
 
 
+Artisan::command('update:track-image', function(){
+
+    $tracks = \DB::table('artist')->where([ 'deleted' => 0])->orderBy('created_at', 'asc')->get();
+    foreach($tracks as $track) {
+        $store_path = '/usr/share/nginx/music/repository/';
+
+        if(file_exists($store_path . $track->cover)) {
+        $file_size = filesize($store_path . $track->cover);
+        if($file_size == 0){
+            dump($track->id);
+        }
+        }
+
+
+    }
+
+
+});
+
+
+
+Artisan::command('update:channel-cover', function(){
+    $channel = App\Channels::where('deleted', 0)->get();
+
+    foreach($channel as  $item) {
+		$item->feedcover = str_replace("https://podcast.app.beatsmusic.ir", "", $item->feedcover);
+        $item->save();
+        echo $item->id . " done. \n\r";
+    }
+
+});
+
+
+Artisan::command('update:podcast-cover', function(){
+    $podcast = App\Podcasts::where([
+        'deleted' => 0,
+    ])->get();
+
+    foreach($podcast as $item) {
+		$item->trackcover = str_replace("https://podcast.app.beatsmusic.ir", "", $item->trackcover);
+		$item->stream = str_replace("https://podcast.app.beatsmusic.ir", "", $item->stream);
+		$item->track_url = str_replace("https://podcast.app.beatsmusic.ir", "", $item->track_url);
+        $item->save();
+        echo $item->id . " done.\n\r";
+    }
+
+});
+
 
 
 Artisan::command('update:album', function(){
