@@ -20,8 +20,8 @@ class Artist
 
 	public function featchDom()
 	{
-		$file_url =  $this->grep()->img('.profile_pic_main img', 'data-src');
-
+		$file_url =  $this->grep()->img('.profile_pic_main img', 'data-src') ??
+                    $this->grep()->img('.profile_pic_main img');
 		return [
 			'name' => $this->grep()->text('.profile_dtls strong'),
 			'translate' => $this->grep()->text('.profile_dtls h2'),
