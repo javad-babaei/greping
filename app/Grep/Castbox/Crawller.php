@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Grep\Castbox;
 
@@ -28,7 +28,7 @@ class Crawller extends Core
 
 
 	public function featchChannel()
-	{	
+	{
 		return [
 			'name' => $this->grep()->text('.ch_feed_info h1'),
 			'played' => $this->grep()->text('.play_count'),
@@ -63,7 +63,7 @@ class Crawller extends Core
 
 	public function add()
 	{
-		
+
 		$entity = new Channel();
 		$channel = $entity->proccess(
 			$this->featchChannel()
@@ -75,7 +75,7 @@ class Crawller extends Core
 		$url = "https://everest.castbox.fm/data/episode_list/v2?cid={$id[0]}&skip=0&limit=100&ascending=1&web=1";
 		$aContext = array(
 		    'http' => array(
-		        'proxy' => 'tcp://128.106.14.227:8080',
+		        'proxy' => 'tcp://159.65.253.109:8080',
 		        'request_fulluri' => true,
 		    ),
 		);
@@ -83,7 +83,7 @@ class Crawller extends Core
 		$data = file_get_contents($url, false, $cxContext);
 		$data = json_decode($data, true);
 		$episode = $data['data']['episode_list'];
-		
+
 		foreach ($episode as $item) {
 			dump($item['episode_id']);
 			$item['channel'] = $channel['name'];
