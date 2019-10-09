@@ -49,16 +49,25 @@ class AllArtistBatch extends Command
                 return $node->attr('href');
             }
         });
-        
+
+        $artists = array_reverse($artists);
+
+        $artistCount = 0;
         foreach ($artists as $url) {
+            dump($url);
             $artist = new Artist($url);
             $artist->add();
+            dump($artistCount++ . " artist success ... ");
 
             $track_links = $artist->getTrackLink();
             // $artist->getAlbum();
 
+
+            $count = 0;
+
             foreach ($track_links as $track_link) {
-                dump($track_link);
+                //dump($track_link);
+                dump($artistCount - 1 . " -> " . $count++ . " start track ... ");
 
                 if($track_link){
                     (

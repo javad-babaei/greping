@@ -26,7 +26,7 @@ class Track extends Api
 			'where[1][type]' => 'contains',
 			'where[1][attribute]' => 'artist',
 			'where[1][value]' => $data['artist']
-		])['total'];
+		]);
 
         return $res;
 	}
@@ -37,21 +37,38 @@ class Track extends Api
 			'where[0][attribute]' => 'name',
 			'where[0][value]' => $name
 		]);
-	}
+    }
+
+    public function downloadImage($data, $collection)
+    {
+        // find file
+        $filepath = "/usr/share/nginx/music/repository/cover/";
+        $cover = $filepath . $collection['list'][0]['id'] . ".jpg";
+        if(filesize($cover) == 0){
+		    file_put_contents($cover , fopen(str_replace(" ","%20",$data['img']), 'r'));
+            dump($collection['list'][0]['id'] . ' => cover downloaded');
+        }
+        // check file size
+        // download image and replace
+        //
+        return true;
+    }
 
 	public function grep($data)
 	{
 		$exists = $this->trackExists($data);
-		if($exists) {
+		if($exists['total']) {
+            $this->downloadImage($data, $exists);
+            dump("track exists ... ");
 			return true;
 		}
-        dump($exists);
 		// create entity
 		$track = $this->create($data);
 		$id = $track['id'];
 
 		// downloaded
 		$this->downloadFile($data['downloadUrl'], $id);
+        dump($id . ': starting download ... ');
 		$this->downloadFile($data['img'], $id, 'cover');
 		// upload databeatsmusic
 		// $base_url = "https://stream.app..ir";
@@ -125,7 +142,8 @@ class Track extends Api
 			return true;
 		}
 
-		file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
+		@file_put_contents($filename , fopen(str_replace(" ","%20",$link), 'r'));
+
 		return true;
 	}
 
@@ -138,15 +156,15 @@ class Track extends Api
 		$audio = $ffmpeg->open($filesource);
 
 		$format = new \FFMpeg\Format\Audio\Aac();
-		$format->on('progress', function ($audio, $format, $percentage) {
-		    echo "$percentage % transcoded" . PHP_EOL;
-		});
+		//$format->on('progress', function ($audio, $format, $percentage) {
+		 //   echo "$percentage % transcoded" . PHP_EOL;
+		//});
 
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 
 		$filename = '/usr/share/nginx/music/repository/track/stream/' . $id . '.aac';
-		$audio->save($format, $filename);
+		//$audio->save($format, $filename);
 
 
 
@@ -163,7 +181,9 @@ class Track extends Api
 		]);
 
 		$ffprobe = \FFMpeg\FFProbe::create();
-		return $ffprobe->format($filename)->get('duration');
+		@$duration =  @$ffprobe->format($filesource)->get('duration');
+
+        return $duration ?? 0;
 	}
 
 }
