@@ -40,13 +40,13 @@ class GreptorArtistWithTrack extends Command
      */
     public function handle()
     {
-        $request = Model::where('done', 0)->where('type', 'artist')->first();
+        $request = Model::where(['deleted' => 0, 'done' => 0])->where('type', 'artist')->first();
 
         if(!$request) {
             return false;
         }
 
-        
+
 
 
         try {
@@ -77,6 +77,6 @@ class GreptorArtistWithTrack extends Command
 
             throw new Exception($message, 1);
         }
-        
+
     }
 }
