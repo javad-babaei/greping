@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tracks extends Model
 {
-    protected $table = 'album';
+    protected $table = 'track';
 	public $timestamps = false;
 	protected $hidden = [];
 	protected $casts = [

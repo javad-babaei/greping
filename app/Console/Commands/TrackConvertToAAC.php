@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 class TrackConvertToAAC extends Command
 {
     /**
@@ -37,24 +36,24 @@ class TrackConvertToAAC extends Command
      */
     public function handle()
     {
-        $tracks = App\Tracks::where('deleted', 0)->all();
+        $tracks = \App\Tracks::where('deleted', 0)->get();
 
         foreach ($tracks as $value) {
-            $r = $this->getExists($value);
-            if($r) {
+            $r = $this->getExists($value->id);
+            if(!$r) {
                 exec(
                     "ffmpeg -i /usr/share/nginx/music/repository/track/" . $value->id . ".mp3" .
-                    "-vn -ac 2 -acodec aac /usr/share/nginx/music/repository/track/" . $id . ".aac" 
+                    " -vn -ac 2 -acodec aac /usr/share/nginx/music/repository/track/stream/" . $value->id . ".aac"
                 );
-                echo $value->id . " done.../r/n";
+                echo $value->id . " done...\r\n";
             } else {
-                echo $value->id . " exists.../r/n";
+                echo $value->id . " exists...\r\n";
             }
         }
 
     }
 
-    public function getExists($file)
+    public function getExists($id)
     {
         return file_exists("/usr/share/nginx/music/repository/track/stream/" . $id . ".aac" );
     }
