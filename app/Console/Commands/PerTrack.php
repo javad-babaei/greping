@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class TrackAhaang extends Command
+class PerTrack extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'grep:ahaang';
+    protected $signature = 'grep:nex1music {url}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'greping from ahaang';
+    protected $description = 'greping from nex1music';
 
     /**
      * Create a new command instance.
@@ -35,9 +35,11 @@ class TrackAhaang extends Command
      *
      * @return mixed
      */
-    public function handle($item)
+    public function handle()
     {
-            $grep = new \App\Grep\TrackAhaang($item);
-            $grep->proccess();
+        $url = $this->argument('url');
+        $grep = new \App\Grep\TrackNextOne($url);
+        $grep->proccess();
+
     }
 }
