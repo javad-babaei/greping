@@ -73,12 +73,12 @@ class Episode extends Api
 	public function downloadFile($link, $id, $type = null)
 	{
 		//This is the file where we save the    information
-		$filename = '/usr/share/nginx/music/repository/podcast/track/' . $id . '.mp3';
+		$filename = '/home/app/repository/podcast/track/' . $id . '.mp3';
 
 
 
 		if($type) {
-			$filename = '/usr/share/nginx/music/repository/podcast/cover/' . $id . '.jpg';
+			$filename = '/home/app/repository/podcast/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
 			$fp = fopen ( $filename , 'w+');
 			//Here is the file we are downloading, replace spaces with %20

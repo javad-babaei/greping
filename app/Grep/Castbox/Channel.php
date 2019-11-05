@@ -51,7 +51,7 @@ class Channel extends Api
 	{
 		set_time_limit(0);
 		//This is the file where we save the    information
-		$filename = '/usr/share/nginx/music/repository/podcast/cover/' . $id . '.jpg';
+		$filename = '/home/app/repository/podcast/cover/' . $id . '.jpg';
 		// file_put_contents($filename , fopen($link, 'r'));
 		
 		$fp = fopen ( $filename , 'w+');
