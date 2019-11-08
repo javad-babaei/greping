@@ -41,6 +41,8 @@ class Ahaang
 			}
 		}
 
+		$artist_name = $this->grep()->filter('.single_text strong')->eq(1)->text();
+
 
 		$single_track_count = $this->grep()->filter('.single_track')->count();
 		if($single_track_count == 1) {
