@@ -20,7 +20,8 @@ class TrackAhaang
 	{	
 		$lyric = $this->grep()->text('.lyric_box');
 		$name = $this->grep()->filter('.single_text strong')->eq(1)->text();
-		$artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();
+		// $artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();
+		$artist_name = $this->grep()->filter('ul li.icon-person a')->eq(0)->text();
 		$trackUrl = $this->grep()->filter('.single_track')->eq(1)->href();
 		$downloadUrl = $this->grep()->link('.single_track_320');
 		$translate = $this->grep()->text('.single_cover h2');		
