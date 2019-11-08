@@ -35,8 +35,12 @@ class TrackAhaang
 			$artist_name = 'غیره';
 		}
 
+
 		$trackUrl = $this->grep()->filter('.single_track')->eq(1)->href();
 		$downloadUrl = $this->grep()->link('.single_track_320');
+		if($downloadUrl == null) {
+			$downloadUrl = $trackUrl;
+		}
 		$translate = $this->grep()->text('.single_cover h2');		
 		$exploded = explode(' - ', $translate);
 		$cover = $this->grep()->img('.single_pic img', 'src') ?? $this->grep()->img('.single_pic img', 'data-src');
