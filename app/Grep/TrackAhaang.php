@@ -50,6 +50,8 @@ class TrackAhaang
 
 	public function proccess()
 	{
+		$soon = $this->grep()->filter('.soon')->count();
+		if($soon) return false;
 		$data = $this->featchDom();
 		return (new \App\Grep\Entity\Track())->grep($data);
 	}
