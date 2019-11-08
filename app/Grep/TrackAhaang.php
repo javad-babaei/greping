@@ -19,7 +19,13 @@ class TrackAhaang
 	public function featchDom()
 	{	
 		$lyric = $this->grep()->text('.lyric_box');
-		$name = $this->grep()->filter('.single_text strong')->eq(1)->text();
+		$name = $this->grep()->filter('.single_text strong');
+		if($name->count()){
+			$name = $this->grep()->filter('.single_text strong')->eq(1)->text();	
+		} else {
+			$name = 'other';
+		}
+		
 		// $artist_name = $this->grep()->filter('.single_text strong')->eq(0)->text();
 		$artist_name = $this->grep()->filter('ul li.icon-person a')->eq(0)->text();
 		$trackUrl = $this->grep()->filter('.single_track')->eq(1)->href();
