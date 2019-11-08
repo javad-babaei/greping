@@ -25,16 +25,21 @@ class TrackAhaang
 		$downloadUrl = $this->grep()->link('.single_track_320');
 		$translate = $this->grep()->text('.single_cover h2');		
 		$exploded = explode(' - ', $translate);
-		if(count($exploded)) {
+		$cover = $this->grep()->img('.single_pic img', 'src') ?? $this->grep()->img('.single_pic img', 'data-src');
+
+		
+		if(count($exploded) > 1) {
 			$translate = $exploded[1];
-		} 
+		} else {
+			$translate = $exploded[0];
+		}
 		
 		return [
 			'description' => $lyric,
 			'downloadUrl' => $downloadUrl,
 			'stream' => '',
 			'trackUrl' => $trackUrl,
-			'img' => $this->grep()->img('.single_pic img', 'data-src'),
+			'img' => $cover,
 			'lyric' => $lyric,
 			'translate' => $translate,
 			'name' => $name,
