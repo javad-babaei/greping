@@ -42,7 +42,7 @@ class AutoUpdateCommand extends Command
 
         $bot = new AutoUpdateNewTrack;
         $bot->setUrl($url);
-        $bot->getNewTrackLinks()->download();
-
+        $bot->getNewTrackLinks();
+        $bot->download();
     }
 }

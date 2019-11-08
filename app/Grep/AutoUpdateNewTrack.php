@@ -30,8 +30,8 @@ class AutoUpdateNewTrack
 	public function download()
 	{
 		foreach ($this->findLinks as $key => $link) {
-			$grep = new \App\Grep\TrackAhaang($link);
-            $grep->proccess();
+				$grep = new \App\Grep\TrackAhaang($link);
+            	$grep->proccess();
 		}
 	}
 
