@@ -45,36 +45,43 @@ class UploadTrackMoveTrack extends Command
         $data = [];
 
         foreach ($list as $track) {
-            $mp3_id = $track['fileId'];
-            $cover_id = $track['coverId'];
+            $mp3_id = $track->file_id;
+            $cover_id = $track->cover_id;
 
             $mp3_file = $upload_path . $mp3_id;
             $cover_file = $upload_path . $cover_id;
 
             $filesource = $path . "track/" . $mp3_id . ".mp3";
             $coversource = $path . "cover/" . $cover_id . ".jpg";
+	    dump($coversource, $cover_file);
+	    dump($filesource, $mp3_file);
+	    exec('cp ' . $cover_file . " " . $coversource);
+	    exec('cp ' . $mp3_file . " " . $filesource);
 
-            file_put_contents($filesource, $mp3_file);
-            file_put_contents($coversource, $cover_id);
+            //file_put_contents($filesource, base64_decode($mp3_file));
+            //file_put_contents($coversource, base64_decode($cover_id));
 
             $ffprobe = \FFMpeg\FFProbe::create();
             @$duration =  @$ffprobe->format($filesource)->get('duration');
             $duration ?? 0;
+		dump($duration);
 
             $data['stream'] = "/track/stream/" . $mp3_id . ".aac";
             $data['trackUrl'] = "/track/" . $mp3_id . ".mp3";
             $data['img'] = "/cover/" . $cover_id . ".jpg";
             $data['segmentlist'] = "/track/segment/" . $mp3_id . "/track.m3u8";
-            $data['name'] = $track['name'];
-            $data['artist'] = $track['artistName'];
-            $data['description'] = $track['description'];
-            $data['lyric'] = $track['description'];
-            $data['genres'] = $track['genres'];
-            $data['publishedDate'] = $track['publishedDate'];
+            $data['name'] = $track->name;
+            //$data['artist'] = $track->artist_name;
+            $data['description'] = $track->description;
+            $data['lyric'] = $track->description;
+            $data['genres'] = $track->genres;
+            $data['publishedDate'] = $track->published_date;
             $data['duration'] = $duration;
+	    $data['assignedUserId'] = 1;
+	    $data['assignedUserName'] = 'root';
 
-            $api = new App\Grep\Entity\Api;
-            $newTrack = $api->request('POST', 'track', $data);
+            $api = new \App\Grep\Entity\Api;
+            $newTrack = $api->client()->request('POST', 'track', $data);
 
             dd($newTrack);
         }

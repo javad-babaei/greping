@@ -42,7 +42,7 @@ class Track extends Api
     public function downloadImage($data, $collection)
     {
         // find file
-        $filepath = "/home/app/repository/cover/";
+        $filepath = "/home/app/music/repository/cover/";
         $cover = $filepath . $collection['list'][0]['id'] . ".jpg";
         if(filesize($cover) == 0){
 		    file_put_contents($cover , fopen(str_replace(" ","%20",$data['img']), 'r'));
@@ -124,9 +124,9 @@ class Track extends Api
 	public function downloadFile($link, $id, $type = null)
 	{
 		//This is the file where we save the    information
-		$filename = '/home/app/repository/track/' . $id . '.mp3';
+		$filename = '/home/app/music/repository/track/' . $id . '.mp3';
 		if($type) {
-			$filename = '/home/app/repository/cover/' . $id . '.jpg';
+			$filename = '/home/app/music/repository/cover/' . $id . '.jpg';
 			// disabled this part download some track incorrct
 			$fp = fopen ( $filename , 'w+');
 			//Here is the file we are downloading, replace spaces with %20
@@ -149,7 +149,7 @@ class Track extends Api
 
 	public function FFMpeg($id, $data = null)
 	{
-		$filesource = '/home/app/repository/track/' . $id . '.mp3';
+		$filesource = '/home/app/music/repository/track/' . $id . '.mp3';
 
 
 		$ffmpeg = \FFMpeg\FFMpeg::create();
@@ -163,7 +163,7 @@ class Track extends Api
 		// need aac format ziped
 		// $format->setAudioChannels(2)->setAudioKiloBitrate(256);
 
-		$filename = '/home/app/repository/track/stream/' . $id . '.aac';
+		$filename = '/home/app/music/repository/track/stream/' . $id . '.aac';
 		//$audio->save($format, $filename);
 
 
