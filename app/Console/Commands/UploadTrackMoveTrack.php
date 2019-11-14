@@ -21,7 +21,7 @@ class UploadTrackMoveTrack extends Command
      *
      * @var string
      */
-    protected $description = 'upload track to track';
+    protected $description = "Migrating upload_track table's rows to tracks table";
 
     /**
      * Create a new command instance.
@@ -40,7 +40,6 @@ class UploadTrackMoveTrack extends Command
      */
     public function handle()
     {
-
         try {
             $list =
                 \DB::table( 'upload_track' )

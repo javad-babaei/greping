@@ -19,6 +19,4 @@ class Api
 	{
 		return $this->client;
 	}
-
-
 }
