@@ -12,7 +12,7 @@ class FilesToTracks extends Command
      *
      * @var string
      */
-    protected $signature = 'upload {--p|path=null} {--no-overwrite}';
+    protected $signature = 'upload {--p|path=null} {--no-overwrite} {--debug}';
 
     /**
      * The console command description.
@@ -47,8 +47,9 @@ class FilesToTracks extends Command
     public function handle()
     {
         $path         = $this->option( 'path'         );
+        $debug        = $this->option( 'debug'        );
         $no_overwrite = $this->option( 'no-overwrite' );
 
-        $this->helper->handler( $path, $no_overwrite );
+        $this->helper->handler( $path, ! $no_overwrite, $debug );
     }
 }
